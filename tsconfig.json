@@ -7,7 +7,6 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "types": ["node", "react", "react-dom"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -20,8 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./*"]
+    },
+    "types": []
   },
   "include": [
     "next-env.d.ts",
@@ -31,5 +31,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "supabase/functions"]
 }

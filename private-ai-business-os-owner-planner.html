@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Private AI Business OS Owner Planner | Lux Automaton</title>
+  <style>
+    :root{--purple:#6c47ff;--cyan:#00bfe8;--teal:#00b98f;--ink:#111827;--muted:#5b6474;--line:#cbd5e1;--paper:#fff}
+    *{box-sizing:border-box}body{margin:0;background:#e9eef5;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.4}
+    .toolbar{position:sticky;top:0;z-index:4;background:#07101f;color:white;padding:12px 18px;display:flex;gap:12px;justify-content:center;align-items:center;border-bottom:1px solid rgba(255,255,255,.12)}
+    .toolbar button{border:0;border-radius:999px;padding:10px 17px;background:linear-gradient(90deg,var(--purple),var(--cyan));color:white;font-weight:800;cursor:pointer}
+    .sheet{width:min(8.5in,calc(100% - 24px));margin:20px auto;background:var(--paper);box-shadow:0 18px 60px rgba(15,23,42,.18);padding:.5in;min-height:11in}
+    header{display:grid;grid-template-columns:1fr 220px;gap:20px;align-items:start;border-bottom:4px solid var(--purple);padding-bottom:16px}
+    header img{width:220px;height:auto;justify-self:end;background:#070b14;border-radius:8px}
+    .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:var(--cyan)}
+    h1{font-size:34px;line-height:1.02;margin:5px 0 8px;letter-spacing:-.04em}
+    .subtitle{font-size:15px;color:var(--muted);margin:0}
+    .identity{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+    .line-box{border-bottom:1px solid var(--ink);min-height:28px;padding-top:8px;font-size:12px;color:var(--muted)}
+    section{margin-top:24px;page-break-inside:avoid}
+    h2{font-size:20px;margin:0 0 10px;display:flex;align-items:center;gap:10px}
+    .num{width:30px;height:30px;border-radius:8px;display:inline-grid;place-items:center;color:white;background:linear-gradient(135deg,var(--purple),var(--cyan));font-size:13px}
+    .hint{font-size:12px;color:var(--muted);margin:-4px 0 12px}
+    table{width:100%;border-collapse:collapse;font-size:11px}
+    th,td{border:1px solid var(--line);padding:8px;vertical-align:top}
+    th{background:#eef4fb;text-align:left}
+    td.blank{height:38px}
+    .check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px}
+    .check{font-size:12px;border:1px solid var(--line);padding:9px;border-radius:8px}
+    .box{display:inline-block;width:14px;height:14px;border:1.5px solid var(--ink);margin-right:7px;vertical-align:-2px}
+    .workflow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .workflow>div{border:1px solid var(--line);border-radius:10px;padding:9px;min-height:105px}
+    .workflow strong{display:block;color:var(--purple);font-size:11px;margin-bottom:6px}
+    .write-lines{background:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,#cbd5e1 24px);min-height:96px;border:1px solid var(--line);border-radius:8px}
+    .week-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .week{border:1px solid var(--line);border-radius:10px;padding:12px}
+    .week h3{font-size:13px;color:var(--cyan);margin:0 0 7px}
+    .score{display:grid;grid-template-columns:1.5fr repeat(5,.55fr);font-size:11px;border:1px solid var(--line);border-bottom:0}
+    .score>div{padding:7px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .score>div:nth-child(6n){border-right:0}
+    .footer-callout{margin-top:24px;border:1px solid var(--purple);border-radius:12px;padding:14px;text-align:center;font-weight:900;color:#2b145e;background:linear-gradient(90deg,rgba(108,71,255,.08),rgba(0,191,232,.08))}
+    .page-break{page-break-before:always}
+    @media(max-width:760px){header{grid-template-columns:1fr}header img{justify-self:start}.identity,.check-grid,.week-grid{grid-template-columns:1fr}.workflow{grid-template-columns:1fr}.sheet{padding:24px}}
+    @media print{@page{size:letter;margin:.35in}body{background:white}.toolbar{display:none}.sheet{width:auto;min-height:auto;margin:0;box-shadow:none;padding:0}header img{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+  </style>
+</head>
+<body>
+  <div class="toolbar"><span>Lux Automaton Owner Planner</span><button onclick="window.print()">Print / Save as PDF</button></div>
+  <main class="sheet">
+    <header>
+      <div>
+        <div class="eyebrow">Lux Automaton · Private AI Systems</div>
+        <h1>Private AI Business OS Owner Planner</h1>
+        <p class="subtitle">Map your business context, choose one repeatable workflow, define privacy boundaries, and plan a 30-day pilot.</p>
+      </div>
+      <img src="lux-automaton-logo.png" alt="Lux Automaton logo">
+    </header>
+
+    <div class="identity">
+      <div class="line-box">Business / organization:</div>
+      <div class="line-box">Owner / project lead:</div>
+      <div class="line-box">Planning date:</div>
+      <div class="line-box">30-day review date:</div>
+    </div>
+
+    <section>
+      <h2><span class="num">1</span> Inventory the scattered context</h2>
+      <p class="hint">List the apps and files people must search before they can complete important work.</p>
+      <table>
+        <thead><tr><th>App, folder, or system</th><th>What it stores</th><th>Who uses it</th><th>Current friction</th></tr></thead>
+        <tbody><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span> Identify the context the OS must unify</h2>
+      <div class="check-grid">
+        <div class="check"><span class="box"></span>Customer files and history</div><div class="check"><span class="box"></span>Product or service notes</div><div class="check"><span class="box"></span>SOPs and checklists</div><div class="check"><span class="box"></span>Budgets and pricing</div><div class="check"><span class="box"></span>Project history</div><div class="check"><span class="box"></span>Calendar and deadlines</div><div class="check"><span class="box"></span>Daily tasks</div><div class="check"><span class="box"></span>Approvals and decisions</div><div class="check"><span class="box"></span>Contracts and policies</div><div class="check"><span class="box"></span>Other: __________________</div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span> Choose one guided workflow</h2>
+      <p class="hint">Start with one process that happens often, has clear inputs, and produces a visible result.</p>
+      <div class="line-box">Workflow name:</div>
+      <div class="workflow">
+        <div><strong>1 · Trigger</strong>What starts the workflow?</div>
+        <div><strong>2 · Context</strong>Which approved files and facts are needed?</div>
+        <div><strong>3 · AI draft</strong>What can the system prepare?</div>
+        <div><strong>4 · Human approval</strong>Who checks and approves?</div>
+        <div><strong>5 · Action + record</strong>What happens, and what becomes the next move?</div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span> Define owner-control boundaries</h2>
+      <table>
+        <thead><tr><th>Data or action</th><th>Where it may live</th><th>Who may access it</th><th>Approval required?</th><th>Audit / backup plan</th></tr></thead>
+        <tbody><tr><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td><td></td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="page-break">
+      <h2><span class="num">5</span> Build the 30-day pilot</h2>
+      <div class="week-grid">
+        <div class="week"><h3>Week 1 — Map the context</h3><div class="write-lines"></div></div>
+        <div class="week"><h3>Week 2 — Build the guided workflow</h3><div class="write-lines"></div></div>
+        <div class="week"><h3>Week 3 — Add permissions and approvals</h3><div class="write-lines"></div></div>
+        <div class="week"><h3>Week 4 — Measure and improve</h3><div class="write-lines"></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">6</span> Measure whether the OS creates leverage</h2>
+      <p class="hint">Score each area before the pilot and after 30 days. Use 1 for poor and 5 for excellent.</p>
+      <div class="score">
+        <div><strong>Measure</strong></div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+        <div>Time spent searching for context</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div><div>Missed follow-ups or steps</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div><div>Speed from intake to next action</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div><div>Quality and consistency of drafts</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div><div>Visibility into current priorities</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div><div>Owner confidence and control</div><div>□</div><div>□</div><div>□</div><div>□</div><div>□</div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">7</span> Responsible-use checklist</h2>
+      <div class="check-grid">
+        <div class="check"><span class="box"></span>Important facts are reviewed by a person</div><div class="check"><span class="box"></span>Customer promises require approval</div><div class="check"><span class="box"></span>Financial actions require approval</div><div class="check"><span class="box"></span>Access follows least-privilege rules</div><div class="check"><span class="box"></span>Sensitive files have a defined storage location</div><div class="check"><span class="box"></span>Activity logs are available</div><div class="check"><span class="box"></span>Source files are backed up</div><div class="check"><span class="box"></span>The owner can export or delete data</div><div class="check"><span class="box"></span>The workflow records the next state</div><div class="check"><span class="box"></span>The team knows when not to use AI</div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">8</span> Decision and next move</h2>
+      <div class="line-box">The first workflow we will build:</div>
+      <div class="line-box">The owner of the workflow:</div>
+      <div class="line-box">The first action due this week:</div>
+      <div class="write-lines" style="margin-top:12px"></div>
+    </section>
+
+    <div class="footer-callout">AI should work for you. Let’s build it. Let’s make something amazing.</div>
+  </main>
+</body>
+</html>

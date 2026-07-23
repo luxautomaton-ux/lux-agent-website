@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <!-- Dark panel background matching the landing page panel -->
+  <rect width="100" height="100" rx="16" fill="#050714" stroke="url(#logo-grad)" stroke-width="2" />
+  <!-- Stylized circuit head profile outline -->
+  <path d="M50 22 C62 22, 72 31, 72 44 C72 53, 67 62, 59 66 L55 70 L45 70 L42 66 C34 62, 29 53, 29 44 C29 31, 39 22, 50 22 Z" stroke="url(#logo-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Circuit tracks inside -->
+  <path d="M50 32 L50 44 L61 44" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" />
+  <circle cx="61" cy="44" r="2" fill="#06b6d4" />
+  <path d="M41 38 L47 38 L51 42" stroke="url(#logo-grad)" stroke-width="1.8" stroke-linecap="round" />
+  <circle cx="41" cy="38" r="1.8" fill="#a855f7" />
+  <path d="M50 52 L57 52 L61 56" stroke="url(#logo-grad)" stroke-width="1.8" stroke-linecap="round" />
+  <circle cx="61" cy="56" r="1.8" fill="#06b6d4" />
+  <path d="M41 48 L47 48 L47 59" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" />
+  <circle cx="47" cy="59" r="2" fill="#a855f7" />
+  <!-- Connection nodes along the perimeter -->
+  <circle cx="50" cy="22" r="2.5" fill="#06b6d4" />
+  <circle cx="72" cy="44" r="2.5" fill="#a855f7" />
+  <circle cx="29" cy="44" r="2.5" fill="#06b6d4" />
+  <circle cx="50" cy="70" r="2.5" fill="#a855f7" />
+</svg>

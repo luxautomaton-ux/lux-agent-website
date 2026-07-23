@@ -1,0 +1,67 @@
+[
+  {
+    "id": "post-002",
+    "url": "https://www.linkedin.com/posts/asapritchard_epic-electric-contractor-ai-activity-7123456789123456790",
+    "author": "Asa Spade",
+    "authorProfile": "https://www.linkedin.com/in/asapritchard/",
+    "authorRole": "Founder, Lux Automaton",
+    "time": "1 week ago",
+    "content": "Epic Electric: Turning Field Service Work Into a High-Performance Business System\nHow local service contractors are using private, secure AI to run their CRM, schedule jobs, and automate quotes.\nContractors are busy doing the actual work, meaning the business side of things often gets scattered across text messages, notebooks, emails, and phone photos. Epic Electric changes this by organizing lead captures, job tracking, scheduling, and customer review requests into a single, guided operations system.\nBuilt on top of the Lux Automaton stack, Epic Electric shows how local contractor crews can streamline invoicing and follow-ups. With Lux Agent USB, teams can even access their database and customer records offline, directly from a secure hardware drive in their trucks.\nStop losing thousands of dollars every year to missed follow-ups and unorganized estimates. Turn your field work into a repeatable business system.",
+    "reactions": 189,
+    "comments": 42,
+    "image": "/images/epic-electric.png",
+    "dateCollected": "2026-06-18 02:00:00"
+  },
+  {
+    "id": "post-003",
+    "url": "https://www.linkedin.com/posts/asapritchard_inland-circle-nonprofit-os-activity-7123456789123456791",
+    "author": "Dr. Torrey Dooley",
+    "authorProfile": "https://www.linkedin.com/company/lux-automaton-saas/posts/",
+    "authorRole": "System Partner, Lux Automaton",
+    "time": "2 weeks ago",
+    "content": "Inland Circle Program OS: Streamlining Community Work and Nonprofit Operations\nBringing order and consistency to program intake, outreach tracking, and volunteer coordination.\nCommunity programs and nonprofit outreach teams carry serious responsibilities with limited staff, limited time, and scattered tools. Disorganization isn't just inefficient — it directly impacts the people you serve.\nInland Circle Program OS brings participant tracking, resource directories, event planning, volunteer workflows, and funder reporting into one unified platform.\nBy leveraging Lux Agent to guide staff tasks and Success Packs for repeatable operating playbooks, organizations can serve their communities more consistently and present clean, professional reports to grant funders.",
+    "reactions": 156,
+    "comments": 29,
+    "image": "/images/inland-circle-os.png",
+    "dateCollected": "2026-06-18 02:00:00"
+  },
+  {
+    "id": "post-004",
+    "url": "https://www.linkedin.com/posts/asapritchard_ai-business-terms-for-newbies-activity-7123456789123456792",
+    "author": "Asa Spade",
+    "authorProfile": "https://www.linkedin.com/in/asapritchard/",
+    "authorRole": "Founder, Lux Automaton",
+    "time": "3 weeks ago",
+    "content": "New Release: 'AI Business Terms for Newbies' — Demystifying AI Operations for Founders\nA practical, plain-English handbook to help business builders understand and deploy AI systems confidently.\nThere is a massive gap between the hype around AI and the actual, practical terms business builders need to know to implement it safely. Most guides are written for data scientists, not founders.\nOur new book, 'AI Business Terms for Newbies', bridges that gap. It defines key concepts — from local LLMs and vector databases to agents, token limits, and secure private contexts — with zero jargon and concrete business examples.\nStop guessing and start building. Get your copy today and learn the language of the modern AI-driven enterprise.",
+    "reactions": 234,
+    "comments": 61,
+    "image": "/images/book-cover-business-terms.jpg",
+    "dateCollected": "2026-06-18 02:00:00"
+  },
+  {
+    "id": "post-005",
+    "url": "https://www.linkedin.com/posts/asapritchard_lux-budgeter-financial-privacy-activity-7123456789123456793",
+    "author": "Asa Spade",
+    "authorProfile": "https://www.linkedin.com/in/asapritchard/",
+    "authorRole": "Founder, Lux Automaton",
+    "time": "1 month ago",
+    "content": "Lux Budgeter: Private, Secure Financial Planning and Operations\nKeep your company's financial model, cash flows, and runway tracking fully local and protected.\nMany companies are leaking proprietary budgets and financial projections to public AI models. When you paste your spreadsheets into cloud chatbots, your sensitive business data is processed and stored on external servers.\nLux Budgeter solves this by deploying a secure financial planning system locally on your network. Run forecasting, model cash flow scenarios, and analyze vendor costs using custom, open-source models that respect your financial privacy.\nIntegrate directly with your business accounts without risking third-party data exposure.",
+    "reactions": 198,
+    "comments": 47,
+    "image": "/images/lux-budgeter.png",
+    "dateCollected": "2026-06-18 02:00:00"
+  },
+  {
+    "id": "post-006",
+    "url": "https://www.linkedin.com/posts/asapritchard_restaurant-success-pack-automation-activity-7123456789123456794",
+    "author": "Dr. Torrey Dooley",
+    "authorProfile": "https://www.linkedin.com/company/lux-automaton-saas/posts/",
+    "authorRole": "System Partner, Lux Automaton",
+    "time": "1 month ago",
+    "content": "Restaurant Success Pack: Streamlining Front and Back of House Operations\nRepeatable playbooks, staff training guides, and daily checklist systems built for hospitality teams.\nRestaurant operations require precise execution under tight margins. Front-of-house training, shift check-ins, kitchen prep SOPs, and vendor inventory follow-ups often live in managers' heads or on laminated papers.\nThe Restaurant Success Pack installs repeatable operations directly into your Lux Automaton dashboard. Manage opening/closing procedures, track vendor invoices, and train new staff using guided AI workflows.\nGive your managers the tools to keep operations consistent across every single shift.",
+    "reactions": 172,
+    "comments": 35,
+    "image": "/images/restaurant-success-pack.png",
+    "dateCollected": "2026-06-18 02:00:00"
+  }
+]
