@@ -20,6 +20,20 @@ export default function BuildPage() {
           </p>
         </div>
       </section>
+
+      <section className="easy-setup-guide" aria-label="Build My Lux setup steps">
+        <article><span>1</span><div><strong>Choose your Success Pack</strong><p>Pick the business or profession that best matches what you do.</p></div></article>
+        <article><span>2</span><div><strong>Add Memory Packs</strong><p>Optional extras that give your Lux team deeper knowledge and context.</p></div></article>
+        <article><span>3</span><div><strong>Choose your team</strong><p>Use the included professional team or upgrade to a custom team.</p></div></article>
+        <article><span>4</span><div><strong>Choose Desktop, USB, or both</strong><p>Tell Lux where you want your setup installed.</p></div></article>
+        <article><span>5</span><div><strong>Review, pay, and install</strong><p>Check your setup, complete checkout, then install your signed Lux setup.</p></div></article>
+      </section>
+
+      <div className="easy-setup-help">
+        <strong>Not sure what to pick?</strong>
+        <p>Start with the Success Pack closest to your business. You can add or change Memory Packs later, and LANA is included automatically.</p>
+      </div>
+
       <BuildMyLux />
     </main>
   )

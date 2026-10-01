@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 lux-website.db
 .env.local
+
+# Keep the documented public support API configuration.
+!.env.example

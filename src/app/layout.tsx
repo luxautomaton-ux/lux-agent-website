@@ -28,7 +28,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/solutions">Solutions</Link>
               <Link href="/store">Pricing</Link>
               <Link href="/download">Download</Link>
-              <Link href="/resources">Resources</Link>
+              <Link href="/knowledge">Knowledge</Link>
+              <Link href="/updates">Updates</Link>
+              <Link href="/support">Support</Link>
               <Link href="/about">Company</Link>
             </nav>
             <Link href="/download" className="header-cta">Get Lux Agent <span>→</span></Link>
@@ -51,8 +53,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <div>
                 <strong>Explore</strong>
                 <Link href="/products">Products</Link>
-                <Link href="/solutions">Solutions</Link>
-                <Link href="/download">Download</Link>
+                <Link href="/getting-started">Getting Started</Link>
+                <Link href="/build">Build My Lux</Link>
+                <Link href="/knowledge">Knowledge</Link>
+                <Link href="/updates">Updates</Link>
+                <Link href="/support">Support</Link>
               </div>
               <div>
                 <strong>Products</strong>

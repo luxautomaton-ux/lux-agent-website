@@ -42,15 +42,20 @@ export default function BuildMyLux() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    Promise.all([
-      fetch(P + "/data/lux-success-packs-100.json").then(r => r.json()),
-      fetch(P + "/data/lux-memory-packs-100.json").then(r => r.json()),
-    ]).then(([success, memory]) => {
-      setSuccessCatalog(success)
-      setMemoryCatalog(memory)
-      setLoaded(true)
-    })
+    fetch(P + "/data/lux-success-packs-index.json")
+      .then(r => r.json())
+      .then(success => {
+        setSuccessCatalog(success)
+        setLoaded(true)
+      })
   }, [])
+
+  useEffect(() => {
+    if (step < 1 || memoryCatalog) return
+    fetch(P + "/data/lux-memory-packs-index.json")
+      .then(r => r.json())
+      .then(memory => setMemoryCatalog(memory))
+  }, [step, memoryCatalog])
 
   useEffect(() => {
     const saved = window.localStorage.getItem("lux-build-my-lux")
@@ -176,7 +181,11 @@ export default function BuildMyLux() {
   const canContinue = step !== 0 || Boolean(selectedSuccess)
 
   if (!loaded) {
-    return <div className="build-loading">Loading the Lux pack library…</div>
+    return (
+      <div className="build-my-lux">
+        <div className="build-loading">Loading 100 ready-to-use Success Packs…</div>
+      </div>
+    )
   }
 
   return (
@@ -261,8 +270,13 @@ export default function BuildMyLux() {
               onChange={event => setMemoryQuery(event.target.value)}
               placeholder="Search 100 Memory Packs"
             />
-            <span>{rankedMemory.length} available</span>
+            <span>{memoryCatalog ? rankedMemory.length + " available" : "Loading Memory Packs…"}</span>
           </div>
+          {!memoryCatalog && (
+            <div className="build-loading-inline">
+              Loading the Memory Pack library. You can skip this step if you do not want add-ons.
+            </div>
+          )}
           <div className="memory-pack-grid">
             {rankedMemory.map(({ pack, score }, index) => {
               const selected = memoryIds.includes(pack.id)

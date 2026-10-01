@@ -1,7 +1,10 @@
 import Link from "next/link"
 
 const resources = [
-  ["Getting Started", "Understand Desktop, USB, packs, agents, approvals, and the Lux operating model.", "/how-it-works"],
+  ["Getting Started", "Follow the beginner setup from Success Pack selection through download and installation.", "/getting-started"],
+  ["Knowledge Articles", "Search step-by-step help for Desktop, USB, packs, updates, voice, privacy, and troubleshooting.", "/knowledge"],
+  ["Support", "Open a customer support case or check the status of an existing case.", "/support"],
+  ["Updates & What’s New", "See customer-facing release notes and the help articles connected to each update.", "/updates"],
   ["Success Packs", "Explore profession-ready workflows, templates, training, and playbooks.", "/success-packs"],
   ["Memory Packs", "Build richer long-term context and reusable knowledge for your AI team.", "/memory-packs"],
   ["Product Guide", "Browse every current Lux Agent product and capability.", "/products"],
