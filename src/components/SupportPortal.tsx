@@ -36,13 +36,14 @@ const categories = [
   ["other", "Other"],
 ]
 
+const DEFAULT_SUPPORT_API = "https://lux-agent-api-337560675313.us-west1.run.app"
+
 function supportApiBase() {
-  const configured = process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL?.replace(/\/$/, "")
-  if (configured) return configured
-  if (typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname)) {
-    return "http://Asas-Mac-mini.local:18789"
-  }
-  return ""
+  const configured =
+    process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL ||
+    process.env.NEXT_PUBLIC_LUX_SUPPORT_API ||
+    DEFAULT_SUPPORT_API
+  return configured.replace(/\/$/, "")
 }
 
 export default function SupportPortal() {

@@ -1,0 +1,44 @@
+name: Sync Hermes customer content
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17,47 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: customer-content-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pull published Knowledge and Updates
+        env:
+          LUX_SUPPORT_API_URL: ${{ vars.LUX_SUPPORT_API_URL }}
+        run: npm run sync:customer-content
+
+      - name: Commit refreshed customer content
+        run: |
+          git config user.name "lux-content-sync"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/hermes-knowledge-snapshot.json \
+                  public/data/hermes-updates-snapshot.json \
+                  public/data/customer-content-sync.json
+          if git diff --cached --quiet; then
+            echo "No customer content changes."
+            exit 0
+          fi
+          git commit -m "content: sync Hermes Knowledge and updates"
+          git push

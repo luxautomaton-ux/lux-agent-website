@@ -17,30 +17,63 @@ type RemoteUpdate = {
   version?: string
 }
 
+const P = "/lux-agent-website"
+const DEFAULT_SUPPORT_API = "https://lux-agent-api-337560675313.us-west1.run.app"
+
 function supportApiBase() {
-  const configured = process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL?.replace(/\/$/, "")
-  if (configured) return configured
-  if (typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname)) {
-    return "http://Asas-Mac-mini.local:18789"
-  }
-  return ""
+  const configured =
+    process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL ||
+    process.env.NEXT_PUBLIC_LUX_SUPPORT_API ||
+    DEFAULT_SUPPORT_API
+  return configured.replace(/\/$/, "")
 }
 
 export default function UpdatesCenter() {
   const [remote, setRemote] = useState<RemoteUpdate[]>([])
   const [checking, setChecking] = useState(true)
+  const [source, setSource] = useState<"live" | "snapshot" | "built-in">("built-in")
 
   useEffect(() => {
-    const api = supportApiBase()
-    if (!api) {
-      setChecking(false)
-      return
+    let cancelled = false
+
+    async function loadUpdates() {
+      const api = supportApiBase()
+
+      try {
+        const response = await fetch(api + "/portal/updates")
+        if (!response.ok) throw new Error("updates unavailable")
+        const data = await response.json()
+        if (cancelled) return
+        if (Array.isArray(data?.updates)) {
+          setRemote(data.updates)
+          setSource("live")
+          return
+        }
+      } catch {}
+
+      try {
+        const response = await fetch(P + "/data/hermes-updates-snapshot.json")
+        if (!response.ok) throw new Error("snapshot unavailable")
+        const data = await response.json()
+        if (cancelled) return
+        if (Array.isArray(data?.updates) && data.updates.length) {
+          setRemote(data.updates)
+          setSource("snapshot")
+          return
+        }
+      } catch {}
+
+      if (!cancelled) {
+        setRemote([])
+        setSource("built-in")
+      }
     }
-    fetch(api + "/portal/updates")
-      .then(response => response.ok ? response.json() : Promise.reject(new Error("updates unavailable")))
-      .then(data => setRemote(Array.isArray(data?.updates) ? data.updates : []))
-      .catch(() => setRemote([]))
-      .finally(() => setChecking(false))
+
+    void loadUpdates().finally(() => {
+      if (!cancelled) setChecking(false)
+    })
+
+    return () => { cancelled = true }
   }, [])
 
   const updates = useMemo(() => {
@@ -65,6 +98,15 @@ export default function UpdatesCenter() {
   return (
     <div>
       {checking && <p className="knowledge-connection-note">Checking for the latest Lux release notes…</p>}
+      {!checking && (
+        <p className="knowledge-connection-note">
+          {source === "live"
+            ? "Live Hermes customer update feed"
+            : source === "snapshot"
+              ? "GitHub-synced Hermes update snapshot"
+              : "Built-in release guidance"}
+        </p>
+      )}
       <div className="updates-list">
         {updates.map(update => (
           <article className="update-card" key={update.id}>

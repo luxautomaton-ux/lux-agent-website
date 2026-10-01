@@ -6,7 +6,8 @@
     "dev": "next dev -p 3080",
     "build": "next build",
     "start": "next start -p 3080",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:customer-content": "node scripts/sync-customer-content.mjs"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

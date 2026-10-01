@@ -4,16 +4,15 @@ import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { CUSTOMER_KNOWLEDGE, KNOWLEDGE_CATEGORIES } from "@/lib/customerKnowledge"
 
+const P = "/lux-agent-website"
+const DEFAULT_SUPPORT_API = "https://lux-agent-api-337560675313.us-west1.run.app"
+
 function getSupportApiBase() {
   const configured =
     process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL ||
     process.env.NEXT_PUBLIC_LUX_SUPPORT_API ||
-    ""
-  if (configured) return configured.replace(/\/$/, "")
-  if (typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname)) {
-    return "http://Asas-Mac-mini.local:18789"
-  }
-  return ""
+    DEFAULT_SUPPORT_API
+  return configured.replace(/\/$/, "")
 }
 
 type LiveArticle = {
@@ -31,7 +30,7 @@ export default function KnowledgeCenter({ categoryOnly }: { categoryOnly?: strin
   const [category, setCategory] = useState("All")
   const [liveArticles, setLiveArticles] = useState<LiveArticle[]>([])
   const [selectedLiveId, setSelectedLiveId] = useState("")
-  const [liveSource, setLiveSource] = useState(false)
+  const [knowledgeSource, setKnowledgeSource] = useState<"live" | "snapshot" | "built-in">("built-in")
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("article") || ""
@@ -39,23 +38,43 @@ export default function KnowledgeCenter({ categoryOnly }: { categoryOnly?: strin
   }, [])
 
   useEffect(() => {
-    const api = getSupportApiBase()
-    if (!api) return
-    fetch(api + "/portal/knowledge?limit=100")
-      .then(response => {
+    let cancelled = false
+
+    async function loadKnowledge() {
+      const api = getSupportApiBase()
+
+      try {
+        const response = await fetch(api + "/portal/knowledge?limit=100")
         if (!response.ok) throw new Error("Knowledge feed unavailable")
-        return response.json()
-      })
-      .then(payload => {
+        const payload = await response.json()
+        if (cancelled) return
         if (Array.isArray(payload?.articles)) {
           setLiveArticles(payload.articles)
-          setLiveSource(true)
+          setKnowledgeSource("live")
+          return
         }
-      })
-      .catch(() => {
+      } catch {}
+
+      try {
+        const response = await fetch(P + "/data/hermes-knowledge-snapshot.json")
+        if (!response.ok) throw new Error("Knowledge snapshot unavailable")
+        const payload = await response.json()
+        if (cancelled) return
+        if (Array.isArray(payload?.articles) && payload.articles.length) {
+          setLiveArticles(payload.articles)
+          setKnowledgeSource("snapshot")
+          return
+        }
+      } catch {}
+
+      if (!cancelled) {
         setLiveArticles([])
-        setLiveSource(false)
-      })
+        setKnowledgeSource("built-in")
+      }
+    }
+
+    void loadKnowledge()
+    return () => { cancelled = true }
   }, [])
 
   const selectedLive = liveArticles.find(article => article.id === selectedLiveId)
@@ -111,8 +130,12 @@ export default function KnowledgeCenter({ categoryOnly }: { categoryOnly?: strin
   return (
     <div className="knowledge-center">
       <div className="knowledge-source">
-        <span className={liveSource ? "live" : ""} />
-        {liveSource ? "Live Hermes Knowledge + built-in guides" : "Built-in customer guides"}
+        <span className={knowledgeSource === "live" ? "live" : knowledgeSource === "snapshot" ? "snapshot" : ""} />
+        {knowledgeSource === "live"
+          ? "Live Hermes Knowledge + built-in guides"
+          : knowledgeSource === "snapshot"
+            ? "GitHub-synced Hermes Knowledge + built-in guides"
+            : "Built-in customer guides"}
       </div>
 
       <div className="knowledge-search">

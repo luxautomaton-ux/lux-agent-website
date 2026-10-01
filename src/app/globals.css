@@ -3333,3 +3333,7 @@ button.knowledge-card{font:inherit;text-align:left;cursor:pointer;width:100%}
   font-size:.82rem;
   line-height:1.55;
 }
+.knowledge-source>span.snapshot{
+  background:#3B82F6;
+  box-shadow:0 0 12px rgba(59,130,246,.75);
+}
