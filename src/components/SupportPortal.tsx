@@ -39,6 +39,9 @@ const categories = [
 const DEFAULT_SUPPORT_API = "https://lux-agent-api-337560675313.us-west1.run.app"
 
 function supportApiBase() {
+  if (typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname)) {
+    return "http://10.0.0.114:18789"
+  }
   const configured =
     process.env.NEXT_PUBLIC_LUX_SUPPORT_API_URL ||
     process.env.NEXT_PUBLIC_LUX_SUPPORT_API ||
