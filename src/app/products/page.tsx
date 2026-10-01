@@ -16,6 +16,14 @@ export default function ProductsPage() {
           <p>Start with Lux Agent Desktop, add portable access, memory, playbooks, communication, automation, verification, and specialized business tools as you grow.</p>
         </div>
       </section>
+      <section className="ecosystem-showcase">
+        <div>
+          <p className="lux-eyebrow">ONE ECOSYSTEM</p>
+          <h2>The Lux Agent product family.</h2>
+          <p>Desktop, portable access, AI tools, memory, workflow automation, verification, communication, and business systems—designed to work together.</p>
+        </div>
+        <img src="/lux-agent-website/brand/products/lux-ecosystem.webp" alt="Lux ecosystem product family" />
+      </section>
       <section className="home-product-section">
         <div className="section-heading">
           <div><p className="lux-eyebrow">ALL PRODUCTS</p><h2>Build the Lux Agent setup that fits your work.</h2></div>

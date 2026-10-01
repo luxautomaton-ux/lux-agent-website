@@ -2279,3 +2279,91 @@ body{background:var(--lux-bg);color:var(--lux-white)}
   height:auto;
   object-fit:contain;
 }
+
+/* Canonical Lux Agent header mark */
+.lux-brandmark img{
+  width:56px;
+  height:56px;
+  object-fit:contain;
+  border-radius:0;
+  filter:drop-shadow(0 0 16px rgba(59,130,246,.28));
+}
+.lux-brandmark.compact img{width:48px;height:48px}
+.lux-brandmark strong b{
+  font:inherit;
+  background:linear-gradient(90deg,#8B5CF6,#3B82F6,#06B6D4);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* Canonical product artwork */
+.lux-product-card{padding:0;overflow:hidden}
+.lux-product-art{
+  position:relative;
+  height:245px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#eef4fb 0%,#dfe9f5 100%);
+  border-bottom:1px solid var(--lux-line);
+}
+.lux-product-art img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.lux-product-art .lux-status{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:rgba(5,11,20,.88);
+  backdrop-filter:blur(10px);
+  color:#8ce9ff;
+  z-index:2;
+}
+.lux-product-card-body{
+  padding:20px 22px 22px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.lux-product-card-body>p{color:#aebed0;line-height:1.55}
+.lux-product-card-body ul{
+  list-style:none;
+  margin:15px 0 20px;
+  padding:0;
+  display:grid;
+  gap:7px;
+  color:#8497af;
+  font-size:.78rem;
+}
+.lux-product-card-body li:before{content:'✓';color:#22c8ff;margin-right:8px}
+.lux-product-card-body>a{
+  margin-top:auto;
+  color:#45c9ff;
+  text-decoration:none;
+  font-weight:800;
+  font-size:.86rem;
+}
+
+.ecosystem-showcase{
+  max-width:1400px;
+  margin:70px auto 0;
+  padding:30px;
+  display:grid;
+  grid-template-columns:.55fr 1.45fr;
+  gap:30px;
+  align-items:center;
+  background:linear-gradient(135deg,#0B1020,#07111f);
+  border:1px solid var(--lux-line);
+  border-radius:22px;
+}
+.ecosystem-showcase h2{font-size:clamp(2rem,3vw,3.4rem);margin:10px 0}
+.ecosystem-showcase p:not(.lux-eyebrow){color:#aebed0;line-height:1.7}
+.ecosystem-showcase img{width:100%;display:block;border-radius:16px}
+@media(max-width:900px){
+  .ecosystem-showcase{grid-template-columns:1fr;margin:40px 20px 0}
+  .lux-product-art{height:280px}
+}
