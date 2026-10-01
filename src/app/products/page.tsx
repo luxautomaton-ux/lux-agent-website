@@ -22,7 +22,7 @@ export default function ProductsPage() {
           <h2>The Lux Agent product family.</h2>
           <p>Desktop, portable access, AI tools, memory, workflow automation, verification, communication, and business systems—designed to work together.</p>
         </div>
-        <img src="/lux-agent-website/brand/products/lux-ecosystem.webp" alt="Lux ecosystem product family" />
+        <img src="/lux-agent-website/brand/products/lux-ecosystem.webp?v=20261001-3" alt="Lux ecosystem product family" />
       </section>
       <section className="home-product-section">
         <div className="section-heading">
