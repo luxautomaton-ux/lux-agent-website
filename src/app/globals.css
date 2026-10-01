@@ -17,7 +17,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-deep);
   color: var(--text);
   min-height: 100vh;
@@ -2099,18 +2099,18 @@ body {
    Locked brand: Lux Agent (product) by Lux Automaton (company)
    ============================================================ */
 :root{
-  --lux-bg:#050910;
-  --lux-bg-2:#09111d;
+  --lux-bg:#0B1020;
+  --lux-bg-2:#000000;
   --lux-panel:rgba(9,18,31,.84);
   --lux-panel-solid:#0c1625;
   --lux-line:rgba(137,185,255,.18);
   --lux-white:#f7fbff;
   --lux-muted:#9fb0c6;
-  --lux-blue:#159cff;
-  --lux-cyan:#19d7f4;
-  --lux-purple:#8b36ff;
+  --lux-blue:#3B82F6;
+  --lux-cyan:#06B6D4;
+  --lux-purple:#8B5CF6;
   --lux-pink:#d450ff;
-  --lux-gradient:linear-gradient(105deg,#9b35ff 0%,#2d68ff 48%,#16d8e8 100%);
+  --lux-gradient:linear-gradient(105deg,#8B5CF6 0%,#3B82F6 50%,#06B6D4 100%);
 }
 html{scroll-behavior:smooth}
 body{background:var(--lux-bg);color:var(--lux-white)}
@@ -2234,7 +2234,7 @@ body{background:var(--lux-bg);color:var(--lux-white)}
 
 .company-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1200px;margin:0 auto;padding:80px 30px}.company-grid article{padding:34px;border:1px solid var(--lux-line);background:#08121e;border-radius:18px}.company-grid h2{font-size:1.5rem;margin-bottom:10px}.company-grid p{color:#9fb0c3;line-height:1.7}
 
-.site-footer{border-top:1px solid var(--lux-line);background:#03070c;padding:54px max(28px,calc((100vw - 1400px)/2)) 24px}
+.site-footer{border-top:1px solid var(--lux-line);background:#0B1020;padding:54px max(28px,calc((100vw - 1400px)/2)) 24px}
 .site-footer-main{display:grid;grid-template-columns:1fr 1.2fr;gap:50px}.site-footer-main>div:first-child p{color:#9cabbe;margin:18px 0 5px}.site-footer-main small{color:#667890}
 .site-footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}.site-footer-links div{display:flex;flex-direction:column;gap:10px}.site-footer-links strong{margin-bottom:4px}.site-footer-links a{color:#8da0b7;text-decoration:none;font-size:.86rem}
 .site-footer-bottom{display:flex;justify-content:space-between;gap:20px;margin-top:35px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);color:#5f7189;font-size:.7rem;letter-spacing:.07em}
@@ -2257,4 +2257,25 @@ body{background:var(--lux-bg);color:var(--lux-white)}
   .office-story{padding:65px 20px}.lana-section{margin:0 20px 70px}.lana-copy{padding:30px}
   .page-hero-copy{margin-left:20px;padding:70px 20px 70px 0}.product-detail-hero,.download-hero{padding:80px 20px}
   .site-footer-main{grid-template-columns:1fr}.site-footer-links{grid-template-columns:1fr 1fr}.site-footer-bottom{flex-direction:column}
+}
+
+/* Official Lux Automaton developer-brand credit */
+.lux-automaton-credit{
+  margin-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:flex-start;
+}
+.lux-automaton-credit span{
+  color:#70829a;
+  font-size:.64rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-weight:800;
+}
+.lux-automaton-credit img{
+  width:min(280px,100%);
+  height:auto;
+  object-fit:contain;
 }

@@ -41,7 +41,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div>
               <BrandMark compact />
               <p>Your AI team. Your business OS. Built for real work.</p>
-              <small>Lux Agent is developed by Lux Automaton.</small>
+              <div className="lux-automaton-credit">
+                <span>Developed by</span>
+                <img src="/lux-agent-website/brand/lux-automaton-logo-transparent.png" alt="Lux Automaton" />
+              </div>
             </div>
             <div className="site-footer-links">
               <div>
@@ -67,7 +70,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </div>
           <div className="site-footer-bottom">
             <span>© 2026 Lux Agent. Developed by Lux Automaton.</span>
-            <span>People · Ideas · Automation · A Brighter Tomorrow</span>
+            <span>AUTOMATE · INNOVATE · ACCELERATE</span>
           </div>
         </footer>
       </body>
