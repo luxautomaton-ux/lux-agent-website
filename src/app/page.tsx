@@ -85,7 +85,7 @@ export default function HomePage() {
 
       <section className="desktop-usb-section">
         <div className="desktop-usb-image desktop-image">
-          <img src={P + "/brand/desktop-logo-reference.png"} alt="Lux Agent Desktop branding" />
+          <img src={P + "/brand/products/lux-agent-desktop-frontback.webp?v=20261001-5"} alt="Lux Agent Desktop product package" />
         </div>
         <div className="desktop-usb-copy">
           <p className="lux-eyebrow">ONE TEAM · TWO WAYS TO WORK</p>
@@ -100,7 +100,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="desktop-usb-image usb-image">
-          <img src={P + "/brand/usb-logo-reference.png"} alt="Lux Agent USB branding" />
+          <img src={P + "/brand/products/lux-agent-usb.webp?v=20261001-5"} alt="Lux Agent USB product package and drive" />
         </div>
       </section>
 

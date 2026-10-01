@@ -42,7 +42,7 @@ export const LUX_PRODUCTS: LuxProduct[] = [
     eyebrow: "Portable Travel Companion",
     status: "Available",
     icon: "🔌",
-    image: "/lux-agent-website/brand/products/lux-agent-usb-box.webp?v=20261001-4",
+    image: "/lux-agent-website/brand/products/lux-agent-usb.webp?v=20261001-5",
     hero: "/lux-agent-website/brand/office-lounge.png",
     primaryHref: "/products/usb",
     primaryLabel: "Explore Travel USB",
