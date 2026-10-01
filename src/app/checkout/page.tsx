@@ -3,6 +3,7 @@
 import React, { Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import BuildMyLuxCheckout from '@/components/BuildMyLuxCheckout'
 
 const PRODUCTS: Record<string, { name: string; price: string; type: string; accent: string; icon: string; desc: string; features: string[]; note?: string }> = {
   prod_download: {
@@ -50,8 +51,13 @@ const PRODUCTS: Record<string, { name: string; price: string; type: string; acce
 
 function CheckoutContent() {
   const searchParams = useSearchParams()
+  const source = searchParams.get('source') || ''
   const productId = searchParams.get('product_id') || ''
   const product = PRODUCTS[productId]
+
+  if (source === 'build-my-lux') {
+    return <BuildMyLuxCheckout />
+  }
 
   if (!product) {
     return (

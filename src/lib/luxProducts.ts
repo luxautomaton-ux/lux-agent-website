@@ -196,8 +196,8 @@ export const LUX_PRODUCTS: LuxProduct[] = [
     icon: "⚙",
     image: "/lux-agent-website/brand/products/agent-builder.webp?v=20261001-3",
     hero: "/lux-agent-website/brand/office-reception.png",
-    primaryHref: "/products/agent-builder",
-    primaryLabel: "Explore Agent Builder",
+    primaryHref: "/build",
+    primaryLabel: "Build or Customize My Lux",
     bullets: ["Agent templates", "Role configuration", "Tool selection", "Workflow design", "Test before launch", "Deployment support"],
     sections: [
       { title: "Turn a role into an agent", body: "Start from the job that needs to be done, then define tools, boundaries, knowledge, and operating rules." },

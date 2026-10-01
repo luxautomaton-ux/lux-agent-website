@@ -5,7 +5,7 @@ import { memoryPacks } from '@/lib/packData'
 
 export const metadata = {
   title: 'Memory Packs | Lux Agent USB',
-  description: 'Browse 20 Lux Agent Memory Pack examples that deepen LANA across sales, money, marketing, operations, research, creative, and AI team workflows.',
+  description: 'Browse featured Lux Agent Memory Packs and use Build My Lux to add from the complete 100-pack enhancement library.',
 }
 
 export default function MemoryPacksPage() {
@@ -15,10 +15,10 @@ export default function MemoryPacksPage() {
         title="Memory Packs make LANA smarter."
         body="Memory Packs give LANA durable business knowledge: how the owner sells, markets, follows up, organizes files, delivers client work, manages money, and routes tasks."
         image="/lux-agent-website/generated-pages/memory-packs-hero.png"
-        primary={{ href: '/success-packs', label: 'View Success Packs' }}
-        secondary={{ href: '/store', label: 'Get Lux Agent USB' }}
+        primary={{ href: '/build', label: 'Build My Lux — Browse All 100' }}
+        secondary={{ href: '/success-packs', label: 'View Success Packs' }}
         stats={[
-          { value: '20', label: 'Memory examples' },
+          { value: '100', label: 'Memory Packs' },
           { value: 'Core', label: 'Business brain' },
           { value: 'Agent', label: 'Routing help' },
           { value: 'Local', label: 'Saved context' },
@@ -27,8 +27,8 @@ export default function MemoryPacksPage() {
 
       <section className="pack-library-section">
         <div className="site-section-head">
-          <h2>20 Memory Pack examples.</h2>
-          <p>Each Memory Pack explains what it stores, which workflows it supports, and which Success Packs it pairs with best.</p>
+          <h2>20 featured Memory Pack examples.</h2>
+          <p>These are featured examples. Build My Lux contains the full 100-pack enhancement library after the customer chooses a Success Pack.</p>
         </div>
         <div className="pack-library-grid">
           {memoryPacks.map(pack => (
@@ -53,8 +53,8 @@ export default function MemoryPacksPage() {
       <SiteCTA
         title="Memory turns one chat into a business brain."
         body="The right memory helps LANA remember the customer’s voice, workflows, files, offers, and daily operating patterns."
-        href="/success-packs"
-        label="Match to Success Packs"
+        href="/build"
+        label="Build My Lux"
       />
     </main>
   )

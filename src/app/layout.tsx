@@ -24,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <nav className="site-nav" aria-label="Primary navigation">
               <Link href="/">Home</Link>
               <Link href="/products">Products</Link>
+              <Link href="/build">Build My Lux</Link>
               <Link href="/solutions">Solutions</Link>
               <Link href="/store">Pricing</Link>
               <Link href="/download">Download</Link>
