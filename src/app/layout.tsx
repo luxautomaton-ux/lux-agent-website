@@ -1,8 +1,12 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import "./globals.css"
 import BrandMark from "@/components/BrandMark"
 
-export const metadata = {
+const siteUrl = "https://luxautomaton-ux.github.io/lux-agent-website/"
+const socialImage = `${siteUrl}og.png`
+
+export const metadata: Metadata = {
   title: {
     default: "Lux Agent | Your AI Team. Your Business OS.",
     template: "%s | Lux Agent",
@@ -11,6 +15,26 @@ export const metadata = {
   icons: {
     icon: "/lux-agent-website/lux-agent-icon.png",
     apple: "/lux-agent-website/lux-agent-icon.png",
+  },
+  openGraph: {
+    title: "Lux Agent | Your AI Team. Your Business OS.",
+    description: "Lux Agent brings LANA, specialist agents, business context, workflows, tools, and human approvals into one private AI workspace.",
+    type: "website",
+    url: siteUrl,
+    images: [
+      {
+        url: socialImage,
+        width: 1200,
+        height: 630,
+        alt: "Lux Agent | Your AI Team. Your Business OS.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lux Agent | Your AI Team. Your Business OS.",
+    description: "A private AI workforce and business operating system built for real work.",
+    images: [socialImage],
   },
 }
 
