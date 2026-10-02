@@ -1,3 +1,5 @@
+[Reading 30 lines from start (total: 30 lines, 0 remaining)]
+
 {
   "name": "lux-agent-website",
   "version": "0.1.0",
@@ -13,7 +15,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",
-    "next": "16.2.6",
+    "next": "16.3.8",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "stripe": "^22.2.0"
@@ -24,7 +26,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.3.8",
     "typescript": "^5"
   }
 }
+
+[executed on device: Asas-Mac-mini.local (5f0a06ac-840c-4fbe-902d-d258fcf1af3d)]
