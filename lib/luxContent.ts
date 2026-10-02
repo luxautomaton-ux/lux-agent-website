@@ -62,6 +62,7 @@ export interface TvEpisode {
   rating: string;
   image: string;
   video?: string;
+  storyUrl?: string;
   description: string;
   tags: string[];
 }
