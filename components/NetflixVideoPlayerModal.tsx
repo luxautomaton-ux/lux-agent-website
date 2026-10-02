@@ -131,12 +131,16 @@ export default function NetflixVideoPlayerModal({ episode, onClose }: NetflixVid
               </Link>
             </div>
 
-            <video
-              src={prefixPath(episode.video)}
-              controls
-              autoPlay
-              className="cinema-video"
-            />
+            {episode.video ? (
+              <video
+                src={prefixPath(episode.video)}
+                controls
+                autoPlay
+                className="cinema-video"
+              />
+            ) : (
+              <Image src={prefixPath(episode.image)} alt={episode.title} fill className="netflix-preview-fallback" />
+            )}
           </div>
         )}
       </div>
