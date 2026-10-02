@@ -14,9 +14,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lux Automaton - Private AI Systems for Builders and Founders",
-  description: "Lux Automaton is the AI Operating System company providing private, secure AI agents, coding environments, and automated business operating systems for builders, founders, and small businesses.",
-  applicationName: "Lux Automaton - Private AI Systems for Builders and Founders",
+  title: "Lux Agent — Your AI Team and Business Workspace",
+  description: "Lux Agent is the customer-facing AI workspace for LANA, specialist agents, business context, guided workflows, approvals, tools, and day-to-day operations.",
+  applicationName: "Lux Agent — Your AI Team and Business Workspace",
   keywords: [
     "AI Operating System",
     "Lux OS",
@@ -37,17 +37,17 @@ export const metadata: Metadata = {
     ]
   },
   openGraph: {
-    title: "Lux Automaton - Private AI Systems for Builders and Founders",
-    description: "Lux Automaton is the AI Operating System company providing private, secure AI agents, coding environments, and automated business operating systems.",
+    title: "Lux Agent — Your AI Team and Business Workspace",
+    description: "Lux Agent brings LANA, specialist agents, business context, workflows, and human approvals into one customer workspace.",
     type: "website",
-    url: "https://luxautomaton-ux.github.io/Lux-Automaton-Website/",
-    images: [{ url: "https://luxautomaton-ux.github.io/Lux-Automaton-Website/og.png", width: 1200, height: 630, alt: "Lux Automaton — Build the future with AI" }],
+    url: "https://luxautomaton-ux.github.io/lux-agent-website/",
+    images: [{ url: "https://luxautomaton-ux.github.io/lux-agent-website/og.png", width: 1200, height: 630, alt: "Lux Agent — Your AI Team and Business Workspace" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lux Automaton - Private AI Systems for Builders and Founders",
-    description: "Private AI Operating Systems and secure agents for builders, founders, and small businesses.",
-    images: ["https://luxautomaton-ux.github.io/Lux-Automaton-Website/og.png"],
+    title: "Lux Agent — Your AI Team and Business Workspace",
+    description: "A customer AI workspace with LANA, specialist agents, business context, workflows, and human approvals.",
+    images: ["https://luxautomaton-ux.github.io/lux-agent-website/og.png"],
   }
 };
 
