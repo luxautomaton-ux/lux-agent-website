@@ -205,7 +205,7 @@ export default function WorkshopsPage() {
               <p>{selected.outcome}</p>
             </div>
             <div className="academy-materials">
-              {selected.materials.map((item) => <span key={item}>{item}</span>)}
+              {(selected.materials ?? []).map((item) => <span key={item}>{item}</span>)}
             </div>
           </article>
         </div>
@@ -246,7 +246,7 @@ export default function WorkshopsPage() {
         </div>
 
         <div className="academy-meta">
-          {selected.learningGoals.length > 0 && (
+          {!!selected.learningGoals?.length && (
             <div className="academy-meta-section">
               <h3>Learning Goals</h3>
               <ul>
@@ -257,7 +257,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.prerequisites.length > 0 && (
+          {!!selected.prerequisites?.length && (
             <div className="academy-meta-section">
               <h3>Prerequisites</h3>
               <ul>
@@ -268,7 +268,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.safetyNotes.length > 0 && (
+          {!!selected.safetyNotes?.length && (
             <div className="academy-meta-section">
               <h3>Safety Notes</h3>
               <ul>
@@ -279,7 +279,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.extensionActivities.length > 0 && (
+          {!!selected.extensionActivities?.length && (
             <div className="academy-meta-section">
               <h3>Extension Activities</h3>
               <ul>
