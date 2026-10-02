@@ -1,0 +1,2 @@
+-- Least-privilege grants and RLS policies are consolidated into
+-- 20261002225920_lux_agent_cloud_core.sql. Version retained for ledger parity.

@@ -1,0 +1,3 @@
+-- Signing-key browser-role denial is consolidated into
+-- 20261002231127_lux_agent_setup_signing_key_registry.sql.
+-- Version retained for production migration-ledger parity.

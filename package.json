@@ -9,7 +9,8 @@
     "lint": "eslint",
     "sync:customer-content": "node scripts/sync-customer-content.mjs",
     "build:cloudflare": "NEXT_PUBLIC_SITE_BASE_PATH= next build",
-    "deploy:cloudflare": "npm run build:cloudflare && npx --yes wrangler@4.34.0 deploy"
+    "deploy:cloudflare": "npm run build:cloudflare && npx --yes wrangler@4.34.0 deploy",
+    "test:day-one": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/dayOneLaunchMatrix.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

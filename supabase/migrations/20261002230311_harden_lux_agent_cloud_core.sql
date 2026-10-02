@@ -1,0 +1,3 @@
+-- Production hardening is consolidated into 20261002225920_lux_agent_cloud_core.sql
+-- for clean-environment reproducibility. This retained migration version keeps
+-- local history aligned with the already-applied production migration ledger.

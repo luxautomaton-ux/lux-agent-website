@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useRef, useSyncExternalStore } from "react"
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import successCatalogData from "../../public/data/lux-success-packs-100.json"
 import memoryCatalogData from "../../public/data/lux-memory-packs-100.json"
@@ -8,6 +8,14 @@ import type { MemoryPackRecord, SuccessPackRecord } from "@/lib/customerSetup"
 import type { SandboxCustomer, SandboxSetup } from "@/lib/buildMyLuxSandbox"
 
 const P = "/lux-agent-website"
+const CHECKOUT_API_URL = process.env.NEXT_PUBLIC_LUX_CHECKOUT_API_URL?.trim() ||
+  "https://khyzmyvrfjwwnbvwfhhk.supabase.co/functions/v1/lux-agent-checkout"
+
+type CheckoutStatus = {
+  enabled: boolean
+  chargesAllowed: boolean
+  activeCatalogItems: number
+}
 
 type SuccessCatalog = { count?: number; packs: SuccessPackRecord[] }
 type MemoryCatalog = { count?: number; packs: MemoryPackRecord[] }
@@ -67,6 +75,18 @@ export default function BuildMyLuxCheckout() {
   const rawSetup = useStorageString("lux-build-my-lux")
   const localAcceptance = useLocalAcceptanceAvailable()
   const setup = useMemo(() => parseSetup(rawSetup), [rawSetup])
+  const [checkoutStatus, setCheckoutStatus] = useState<CheckoutStatus | null>(null)
+  const [checkoutMessage, setCheckoutMessage] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    fetch(CHECKOUT_API_URL, { method: "GET", cache: "no-store" })
+      .then(async response => response.ok ? await response.json() as CheckoutStatus : null)
+      .then(value => { if (active) setCheckoutStatus(value) })
+      .catch(() => { if (active) setCheckoutStatus(null) })
+    return () => { active = false }
+  }, [])
 
   const success = setup
     ? successCatalog.packs.find(pack => pack.id === setup.successId) ?? null
@@ -132,7 +152,7 @@ export default function BuildMyLuxCheckout() {
           </article>
           <article>
             <span>TEAM</span>
-            <h2>LANA + 7 professional agents · $199 one-time</h2>
+            <h2>LANA + 7 professional agents</h2>
             <p>{setup.customTeam ? "Premium team customization added on top of the core team" : "Complete generic business team included"}</p>
           </article>
           <article>
@@ -154,24 +174,43 @@ export default function BuildMyLuxCheckout() {
           <p className="lux-eyebrow">CUSTOMER DETAILS</p>
           <h2>Continue with this setup</h2>
           <p className="checkout-price-note">
-            Final pricing uses the current Success Pack, Memory Pack, install-target,
-            and premium-customization pricing table.
+            Final pricing comes from the approved launch catalog for your Success Pack,
+            Memory Packs, install target, and any premium customization.
           </p>
 
           <form
             ref={formRef}
-            onSubmit={event => {
+            onSubmit={async event => {
               event.preventDefault()
               const customer = customerFromForm()
-              if (!customer) return
+              if (!customer || submitting) return
               saveCustomer(customer)
+              if (!checkoutStatus?.enabled || !checkoutStatus.chargesAllowed) {
+                setCheckoutMessage("Secure checkout is staged but not activated until launch pricing is published.")
+                return
+              }
 
-              const subject = encodeURIComponent("Build My Lux checkout request")
-              const memoryLine = memory.map(pack => pack.name).join(", ") || "None"
-              const body = encodeURIComponent(
-                `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease send the secure payment/entitlement next step.`,
-              )
-              window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
+              setSubmitting(true)
+              setCheckoutMessage("")
+              try {
+                const response = await fetch(CHECKOUT_API_URL, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    customer,
+                    setup,
+                    returnPathPrefix: window.location.pathname.startsWith(P) ? P : "",
+                  }),
+                })
+                const result = await response.json() as { url?: string; error?: string }
+                if (!response.ok || !result.url) {
+                  throw new Error(result.error || "Secure checkout is not available.")
+                }
+                window.location.assign(result.url)
+              } catch (error) {
+                setCheckoutMessage(error instanceof Error ? error.message : "Secure checkout is not available.")
+                setSubmitting(false)
+              }
             }}
           >
             <label>
@@ -188,13 +227,14 @@ export default function BuildMyLuxCheckout() {
             </label>
 
             <div className="checkout-total">
-              <span>Core business team</span>
-              <strong>$199 one-time + selected add-ons</strong>
+              <span>Launch catalog</span>
+              <strong>{checkoutStatus?.enabled ? "Secure checkout ready" : "Pricing activates at launch"}</strong>
             </div>
 
-            <button className="lux-button primary" type="submit">
-              Continue to Payment / Entitlement →
+            <button className="lux-button primary" type="submit" disabled={submitting || !checkoutStatus?.enabled}>
+              {submitting ? "Opening secure checkout…" : checkoutStatus?.enabled ? "Continue to Secure Payment →" : "Checkout Activates With Launch Pricing"}
             </button>
+            {checkoutMessage && <p className="checkout-status-message" role="status">{checkoutMessage}</p>}
 
             {localAcceptance && (
               <button
@@ -204,7 +244,8 @@ export default function BuildMyLuxCheckout() {
                   const customer = customerFromForm()
                   if (!customer) return
                   saveCustomer(customer)
-                  window.location.href = P + "/checkout/mock-pay"
+                  const prefix = window.location.pathname.startsWith(P) ? P : ""
+                  window.location.href = prefix + "/checkout/mock-pay"
                 }}
               >
                 Run Local Acceptance Checkout
@@ -212,8 +253,8 @@ export default function BuildMyLuxCheckout() {
             )}
 
             <small>
-              Production checkout is not yet automated. The localhost-only acceptance checkout moves no money,
-              creates no production license, and exists only to verify the complete setup/download workflow.
+              Secure checkout and entitlement infrastructure are staged behind the approved launch catalog.
+              The localhost-only acceptance checkout moves no money and creates no production entitlement.
             </small>
           </form>
         </aside>

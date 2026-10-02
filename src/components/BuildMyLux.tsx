@@ -298,7 +298,7 @@ export default function BuildMyLux() {
             </div>
             <div className="general-team-entry-price">
               <span>8-role team</span>
-              <strong>$199</strong>
+              <strong>Launch pricing</strong>
               <small>one-time</small>
               <button
                 type="button"
@@ -474,7 +474,7 @@ export default function BuildMyLux() {
           <div className="team-showcase-hero">
             <div>
               <p className="lux-eyebrow">STEP 3 · THE LUX BUSINESS TEAM</p>
-              <h2>A whole business team.<br /><span>One $199 one-time setup.</span></h2>
+              <h2>A whole business team.<br /><span>One coordinated Lux setup.</span></h2>
               <p>
                 This is the core Lux Agent team: LANA plus seven specialist business departments.
                 Use it as a general business team on its own, specialize it with a Success Pack,
@@ -491,7 +491,7 @@ export default function BuildMyLux() {
             </div>
             <div className="team-showcase-price">
               <span>COMPLETE TEAM</span>
-              <strong>$199</strong>
+              <strong>Launch pricing</strong>
               <small>one-time payment</small>
               <p>One purchase gives you a coordinated business team instead of a single custom role.</p>
             </div>
@@ -548,7 +548,7 @@ export default function BuildMyLux() {
 
           <div className="team-included-summary">
             <div>
-              <p className="lux-eyebrow">WHAT THE $199 TEAM GIVES YOU</p>
+              <p className="lux-eyebrow">WHAT THE STANDARD TEAM GIVES YOU</p>
               <h3>A practical starting company structure—even if you are starting from zero.</h3>
               <p>
                 You are not buying eight isolated chatbots. LANA coordinates the work across Sales,
@@ -571,7 +571,7 @@ export default function BuildMyLux() {
               <p className="lux-eyebrow">PREMIUM CUSTOMIZATION</p>
               <h3>Want a team built specifically for your company?</h3>
               <p>
-                The complete standard team is included in the $199 one-time team setup. Upgrade only if you want to customize
+                The complete standard team is included in your approved Lux setup. Upgrade only if you want to customize
                 departments, names, personas, role details, or voice style through Lux Agent Builder.
               </p>
             </div>
@@ -685,7 +685,7 @@ export default function BuildMyLux() {
             </article>
             <article>
               <span>TEAM</span>
-              <h3>LANA + {STANDARD_CUSTOMER_TEAM.length - 1} professional agents · $199 one-time</h3>
+              <h3>LANA + {STANDARD_CUSTOMER_TEAM.length - 1} professional agents · included in the core setup</h3>
               <p>{customTeam ? "Premium team customization requested in addition to the core team" : "Complete generic business team included"}</p>
             </article>
             <article>

@@ -37,7 +37,8 @@ export default function KnowledgeCenter({ categoryOnly }: { categoryOnly?: strin
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("article") || ""
-    setSelectedLiveId(id)
+    const frame = window.requestAnimationFrame(() => setSelectedLiveId(id))
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
   useEffect(() => {
