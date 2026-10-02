@@ -9,6 +9,19 @@ import { fetchWorkshops, workshopRowToProgram } from "@/lib/workshopDb";
 
 const tabs: Array<"All" | Audience> = ["All", "Lux Automaton", "Lux AI Kids"];
 
+function normalizeLesson(lesson: string | WorkshopLesson): WorkshopLesson {
+  if (typeof lesson !== "string") return lesson;
+  return {
+    title: lesson,
+    duration: "15–20 min",
+    overview: `Work on ${lesson.toLowerCase()} one practical step at a time.`,
+    activity: "Use one real example, write a short answer, then make it clear enough for someone else to follow.",
+    deliverable: "One short plan or artifact you can use this week.",
+    tips: ["Start small", "Use plain language", "Review the result before using it"],
+    checkIn: "Can you explain what you made, what it is for, and what happens next?",
+  };
+}
+
 function LessonCard({ lesson, index }: { lesson: WorkshopLesson; index: number }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -121,6 +134,7 @@ export default function WorkshopsPage() {
     () => activeTab === "All" ? allWorkshops : allWorkshops.filter((workshop) => workshop.audience === activeTab),
     [activeTab, allWorkshops],
   );
+  const lessons = useMemo(() => selected.lessons.map(normalizeLesson), [selected]);
 
   return (
     <main className="academy-world">
@@ -191,7 +205,7 @@ export default function WorkshopsPage() {
               <p>{selected.outcome}</p>
             </div>
             <div className="academy-materials">
-              {selected.materials.map((item) => <span key={item}>{item}</span>)}
+              {(selected.materials ?? []).map((item) => <span key={item}>{item}</span>)}
             </div>
           </article>
         </div>
@@ -225,14 +239,14 @@ export default function WorkshopsPage() {
             <h2>{selected.title}</h2>
           </div>
           <div className="academy-lessons">
-            {selected.lessons.map((lesson, i) => (
-              <LessonCard key={lesson.title} lesson={lesson} index={i} />
+            {lessons.map((lesson, i) => (
+              <LessonCard key={`${lesson.title}-${i}`} lesson={lesson} index={i} />
             ))}
           </div>
         </div>
 
         <div className="academy-meta">
-          {selected.learningGoals.length > 0 && (
+          {!!selected.learningGoals?.length && (
             <div className="academy-meta-section">
               <h3>Learning Goals</h3>
               <ul>
@@ -243,7 +257,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.prerequisites.length > 0 && (
+          {!!selected.prerequisites?.length && (
             <div className="academy-meta-section">
               <h3>Prerequisites</h3>
               <ul>
@@ -254,7 +268,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.safetyNotes.length > 0 && (
+          {!!selected.safetyNotes?.length && (
             <div className="academy-meta-section">
               <h3>Safety Notes</h3>
               <ul>
@@ -265,7 +279,7 @@ export default function WorkshopsPage() {
             </div>
           )}
 
-          {selected.extensionActivities.length > 0 && (
+          {!!selected.extensionActivities?.length && (
             <div className="academy-meta-section">
               <h3>Extension Activities</h3>
               <ul>

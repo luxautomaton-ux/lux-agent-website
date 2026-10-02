@@ -39,18 +39,25 @@ export interface WorkshopProgram {
   level: "Beginner" | "Intermediate" | "Advanced";
   ageBand: string;
   duration: string;
-  lessons: WorkshopLesson[];
+  lessons: Array<string | WorkshopLesson>;
   image: string;
   thumbnail: string;
+  downloadFiles?: Array<{ title: string; url: string }>;
   brandLogo?: string;
   video?: string;
   outcome: string;
-  materials: string[];
+  materials?: string[];
   description: string;
-  learningGoals: string[];
-  prerequisites: string[];
-  safetyNotes: string[];
-  extensionActivities: string[];
+  learningGoals?: string[];
+  prerequisites?: string[];
+  safetyNotes?: string[];
+  extensionActivities?: string[];
+  workbookPdfUrl?: string;
+  facilitatorDeckPdfUrl?: string;
+  fullGuidePdfUrl?: string;
+  date?: string;
+  status?: "published" | "scheduled" | "draft";
+  draft?: boolean;
 }
 
 export interface TvEpisode {
@@ -62,6 +69,7 @@ export interface TvEpisode {
   rating: string;
   image: string;
   video?: string;
+  storyUrl?: string;
   description: string;
   tags: string[];
 }
@@ -410,7 +418,7 @@ export type WorkshopCategory =
   | "family-projects"
   | "creative-lab";
 
-export interface WorkshopLesson {
+export interface KidsWorkshopLesson {
   title: string;
   duration: string;
   aceIntro: string;
@@ -432,7 +440,7 @@ export interface KidsWorkshop {
   description: string;
   learningGoals: string[];
   whatYouMake: string[];
-  lessons: WorkshopLesson[];
+  lessons: KidsWorkshopLesson[];
   materials: string[];
   safetyNotes: string[];
   extensionActivities: string[];
