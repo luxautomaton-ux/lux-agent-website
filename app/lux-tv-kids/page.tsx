@@ -21,14 +21,16 @@ export default function LuxTvKidsPage() {
     <main className="tv-world kids-tv">
       {/* HERO SECTION */}
       <section className="tv-hero kids-tv-hero">
-        <video
-          className="world-hero-video"
-          src={prefixPath(featured.video)}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        {featured.video && (
+          <video
+            className="world-hero-video"
+            src={prefixPath(featured.video)}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        )}
         <div className="world-hero-shade" />
         <div className="tv-copy">
           <p>LUX TV KIDS</p>
