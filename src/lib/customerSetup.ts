@@ -120,7 +120,7 @@ export type CustomTeamRequest = {
 }
 
 export function createSetupManifest(input: {
-  successPack: SuccessPackRecord
+  successPack?: SuccessPackRecord | null
   memoryPacks: MemoryPackRecord[]
   target: InstallTarget
   customTeam: CustomTeamRequest
@@ -144,7 +144,7 @@ export function createSetupManifest(input: {
       policy: STANDARD_TEAM_POLICY,
     },
 
-    successPack: {
+    successPack: input.successPack ? {
       id: input.successPack.id,
       packNumber: input.successPack.packNumber,
       name: input.successPack.name,
@@ -154,7 +154,8 @@ export function createSetupManifest(input: {
       workflow: input.successPack.workflow,
       starterPrompts: input.successPack.starterPrompts,
       safetyRules: input.successPack.safetyRules,
-    },
+    } : null,
+    operatingMode: input.successPack ? "success-pack-enhanced" : "general-business-team",
     memoryPacks: input.memoryPacks.map(pack => ({
       id: pack.id,
       name: pack.name,

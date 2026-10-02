@@ -103,7 +103,13 @@ export default function SupportPortal() {
       setLookupId(String(request.id))
       event.currentTarget.reset()
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Could not create case.")
+      const reason = cause instanceof Error ? cause.message : "Could not create case."
+      setError(reason + " Opening the support email fallback so you can still reach the team.")
+      const subject = encodeURIComponent("Lux Support Request: " + payload.subject)
+      const body = encodeURIComponent(
+        `Email: ${payload.contact_email}\nCategory: ${payload.category}\nPriority: ${payload.priority}\n\n${payload.description}\n\nThe secure case API was unavailable when this request was submitted.`,
+      )
+      window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
     } finally {
       setSending(false)
     }

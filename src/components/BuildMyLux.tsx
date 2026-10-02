@@ -1,7 +1,12 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import Link from "next/link"
+import Image from "next/image"
+import successCatalogData from "../../public/data/lux-success-packs-index.json"
+import memoryCatalogData from "../../public/data/lux-memory-packs-index.json"
+import { successPackAccent, successPackImage, successPackSlug } from "@/lib/successPackVisual"
+import { memoryPackAccent, memoryPackImage, memoryPackNumber, memoryPackSlug } from "@/lib/memoryPackVisual"
 import {
   createSetupManifest,
   STANDARD_CUSTOMER_TEAM,
@@ -23,60 +28,131 @@ const departments = [
   "Technology",
 ]
 
+const TEAM_CARD_VISUALS: Record<string, {
+  background: string
+  headline: string
+  value: string
+  outputs: string[]
+  tag: string
+}> = {
+  lana: {
+    background: P + "/brand/office-command.png",
+    headline: "Command the whole operation.",
+    value: "LANA turns goals into plans, routes work to the right department, keeps approvals visible, and helps the team move as one business instead of eight disconnected tools.",
+    outputs: ["Daily priorities", "Team coordination", "Approvals & follow-through"],
+    tag: "EXECUTIVE COMMAND",
+  },
+  sales: {
+    background: P + "/brand/office-reception.png",
+    headline: "Turn interest into organized follow-up.",
+    value: "The Sales Agent helps organize leads, shape offers, draft follow-up, and keep customer conversations moving without losing the human review step.",
+    outputs: ["Lead follow-up", "Offer support", "Customer conversations"],
+    tag: "SALES",
+  },
+  marketing: {
+    background: P + "/brand/office-lounge.png",
+    headline: "Give the business a consistent market voice.",
+    value: "The Marketing Agent helps position the business, plan campaigns, develop offers, and keep growth work connected to what the company is actually trying to sell.",
+    outputs: ["Campaign plans", "Positioning", "Growth ideas"],
+    tag: "MARKETING",
+  },
+  operations: {
+    background: P + "/brand/office-boardroom.png",
+    headline: "Keep the business organized behind the scenes.",
+    value: "The Operations Agent turns plans into schedules, checklists, recurring routines, and clean handoffs so important work does not live only in conversation.",
+    outputs: ["Schedules", "Checklists", "Operational handoffs"],
+    tag: "OPERATIONS",
+  },
+  automation: {
+    background: P + "/brand/office-command.png",
+    headline: "Make repeatable work easier to execute.",
+    value: "The Automation & Build Agent helps translate processes into workflows, technical handoffs, tools, and connected systems while keeping sensitive actions behind approval gates.",
+    outputs: ["Workflow design", "Automation handoffs", "Technical coordination"],
+    tag: "AUTOMATION + BUILD",
+  },
+  finance: {
+    background: P + "/brand/office-executive.png",
+    headline: "Bring more structure to the money side.",
+    value: "The Finance Agent helps organize pricing, budgets, cash-flow thinking, reporting, and finance-related preparation so the owner can make better-informed decisions.",
+    outputs: ["Pricing support", "Budget organization", "Reporting prep"],
+    tag: "FINANCE",
+  },
+  research: {
+    background: P + "/brand/office-hallway.png",
+    headline: "Ground decisions in better information.",
+    value: "The Research Agent helps compare sources, study markets, track competitors, and surface useful opportunities so the rest of the team has evidence to work with.",
+    outputs: ["Market research", "Competitor checks", "Opportunity discovery"],
+    tag: "RESEARCH",
+  },
+  social: {
+    background: P + "/brand/office-lounge.png",
+    headline: "Keep content moving without losing the brand.",
+    value: "The Social & Content Agent helps organize calendars, draft posts and captions, adapt ideas to different platforms, and keep public-facing content aligned with the business.",
+    outputs: ["Content calendars", "Posts & captions", "Platform formatting"],
+    tag: "SOCIAL + CONTENT",
+  },
+}
+
 type SuccessCatalog = { count: number; packs: SuccessPackRecord[] }
 type MemoryCatalog = { count: number; packs: MemoryPackRecord[] }
 
+const SUCCESS_CATALOG = successCatalogData as SuccessCatalog
+const MEMORY_CATALOG = memoryCatalogData as MemoryCatalog
+
 export default function BuildMyLux() {
   const [step, setStep] = useState(0)
-  const [successCatalog, setSuccessCatalog] = useState<SuccessCatalog | null>(null)
-  const [memoryCatalog, setMemoryCatalog] = useState<MemoryCatalog | null>(null)
+  const successCatalog = SUCCESS_CATALOG
+  const memoryCatalog = MEMORY_CATALOG
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("All")
   const [successId, setSuccessId] = useState("")
+  const [generalTeamMode, setGeneralTeamMode] = useState(false)
   const [memoryIds, setMemoryIds] = useState<string[]>([])
   const [memoryQuery, setMemoryQuery] = useState("")
   const [customTeam, setCustomTeam] = useState(false)
   const [customDepartments, setCustomDepartments] = useState<string[]>([])
   const [customNotes, setCustomNotes] = useState("")
   const [target, setTarget] = useState<InstallTarget>("desktop")
-  const [loaded, setLoaded] = useState(false)
+  const restored = useRef(false)
 
   useEffect(() => {
-    fetch(P + "/data/lux-success-packs-index.json")
-      .then(r => r.json())
-      .then(success => {
-        setSuccessCatalog(success)
-        setLoaded(true)
-      })
+    const frame = window.requestAnimationFrame(() => {
+      const saved = window.localStorage.getItem("lux-build-my-lux")
+      const requestedStep = new URLSearchParams(window.location.search).get("step")
+      if (saved) {
+        try {
+          const data = JSON.parse(saved)
+          setSuccessId(data.successId ?? "")
+          setGeneralTeamMode(Boolean(data.generalTeamMode))
+          setMemoryIds(data.memoryIds ?? [])
+          setCustomTeam(Boolean(data.customTeam))
+          setCustomDepartments(data.customDepartments ?? [])
+          setCustomNotes(data.customNotes ?? "")
+          setTarget(data.target ?? "desktop")
+
+          if (requestedStep === "memory" && (data.successId || data.generalTeamMode)) {
+            setStep(1)
+          } else if (requestedStep === "team" && (data.successId || data.generalTeamMode)) {
+            setStep(2)
+          }
+        } catch {}
+      } else if (requestedStep === "team") {
+        setGeneralTeamMode(true)
+        setStep(2)
+      }
+      restored.current = true
+    })
+
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
   useEffect(() => {
-    if (step < 1 || memoryCatalog) return
-    fetch(P + "/data/lux-memory-packs-index.json")
-      .then(r => r.json())
-      .then(memory => setMemoryCatalog(memory))
-  }, [step, memoryCatalog])
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem("lux-build-my-lux")
-    if (!saved) return
-    try {
-      const data = JSON.parse(saved)
-      setSuccessId(data.successId ?? "")
-      setMemoryIds(data.memoryIds ?? [])
-      setCustomTeam(Boolean(data.customTeam))
-      setCustomDepartments(data.customDepartments ?? [])
-      setCustomNotes(data.customNotes ?? "")
-      setTarget(data.target ?? "desktop")
-    } catch {}
-  }, [])
-
-  useEffect(() => {
-    if (!loaded) return
+    if (!restored.current) return
     window.localStorage.setItem(
       "lux-build-my-lux",
       JSON.stringify({
         successId,
+        generalTeamMode,
         memoryIds,
         customTeam,
         customDepartments,
@@ -84,10 +160,10 @@ export default function BuildMyLux() {
         target,
       }),
     )
-  }, [loaded, successId, memoryIds, customTeam, customDepartments, customNotes, target])
+  }, [successId, generalTeamMode, memoryIds, customTeam, customDepartments, customNotes, target])
 
-  const successPacks = successCatalog?.packs ?? []
-  const memoryPacks = memoryCatalog?.packs ?? []
+  const successPacks = SUCCESS_CATALOG.packs
+  const memoryPacks = MEMORY_CATALOG.packs
   const selectedSuccess = successPacks.find(pack => pack.id === successId)
   const selectedMemory = memoryPacks.filter(pack => memoryIds.includes(pack.id))
   const categories = useMemo(
@@ -140,9 +216,11 @@ export default function BuildMyLux() {
       .sort((a, b) => b.score - a.score || a.pack.name.localeCompare(b.pack.name))
   }, [memoryPacks, selectedSuccess, memoryQuery])
 
-  const manifest = selectedSuccess
+  const hasBaseSetup = Boolean(selectedSuccess || generalTeamMode)
+
+  const manifest = hasBaseSetup
     ? createSetupManifest({
-        successPack: selectedSuccess,
+        successPack: selectedSuccess ?? null,
         memoryPacks: selectedMemory,
         target,
         customTeam: {
@@ -173,20 +251,12 @@ export default function BuildMyLux() {
     const href = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = href
-    link.download = `lux-setup-${selectedSuccess?.id ?? "preview"}.json`
+    link.download = `lux-setup-${selectedSuccess?.id ?? "general-business-team"}.json`
     link.click()
     URL.revokeObjectURL(href)
   }
 
-  const canContinue = step !== 0 || Boolean(selectedSuccess)
-
-  if (!loaded) {
-    return (
-      <div className="build-my-lux">
-        <div className="build-loading">Loading 100 ready-to-use Success Packs…</div>
-      </div>
-    )
-  }
+  const canContinue = step !== 0 || hasBaseSetup
 
   return (
     <div className="build-my-lux">
@@ -196,7 +266,7 @@ export default function BuildMyLux() {
             key={label}
             className={index === step ? "active" : index < step ? "done" : ""}
             onClick={() => {
-              if (index === 0 || selectedSuccess) setStep(index)
+              if (index === 0 || hasBaseSetup) setStep(index)
             }}
           >
             <span>{index + 1}</span>
@@ -215,6 +285,36 @@ export default function BuildMyLux() {
               starter prompts, outcomes, and safety rules are already organized for the field.
             </p>
           </div>
+
+          <div className={"general-team-entry" + (generalTeamMode ? " selected" : "")}>
+            <div>
+              <p className="lux-eyebrow">NOT SURE OF YOUR INDUSTRY YET?</p>
+              <h3>Start with the complete Lux Business Team.</h3>
+              <p>
+                Skip industry specialization for now. Get LANA plus Sales, Marketing, Operations,
+                Automation, Finance, Research, and Social/Content as a general-purpose business team.
+                You can add a Success Pack later when you know the field you want to specialize in.
+              </p>
+            </div>
+            <div className="general-team-entry-price">
+              <span>8-role team</span>
+              <strong>$199</strong>
+              <small>one-time</small>
+              <button
+                type="button"
+                onClick={() => {
+                  setGeneralTeamMode(true)
+                  setSuccessId("")
+                  setStep(1)
+                }}
+              >
+                Build with the General Team →
+              </button>
+            </div>
+          </div>
+
+          <div className="build-or-divider"><span>OR CHOOSE AN INDUSTRY SUCCESS PACK</span></div>
+
           <div className="build-filters">
             <input
               value={query}
@@ -230,97 +330,240 @@ export default function BuildMyLux() {
           <div className="success-pack-grid">
             {filteredSuccess.map(pack => {
               const selected = pack.id === successId
+              const image = successPackImage(pack)
+              const accent = successPackAccent(pack.packNumber)
               return (
-                <button
+                <article
                   key={pack.id}
-                  className={"success-pack-choice" + (selected ? " selected" : "")}
-                  onClick={() => setSuccessId(pack.id)}
+                  className={"success-pack-choice rich" + (selected ? " selected" : "")}
+                  style={{ "--pack-accent": accent } as CSSProperties}
                 >
-                  <div className="pack-number">#{String(pack.packNumber).padStart(3, "0")}</div>
-                  <span>{pack.category}</span>
-                  <h3>{pack.name}</h3>
-                  <p>{pack.oneLiner}</p>
-                  <strong>{selected ? "Selected ✓" : "Choose this pack"}</strong>
-                </button>
+                  <div className="success-pack-card-art">
+                    <Image
+                      src={image}
+                      alt={pack.name}
+                      fill
+                      sizes="(max-width: 720px) 100vw, (max-width: 1050px) 33vw, 25vw"
+                    />
+                    <div className="success-pack-card-shade" />
+                    <div className="success-pack-card-badges">
+                      <span>#{String(pack.packNumber).padStart(3, "0")}</span>
+                      <span>{pack.category}</span>
+                    </div>
+                  </div>
+                  <div className="success-pack-card-copy">
+                    <h3>{pack.name}</h3>
+                    <p>{pack.oneLiner}</p>
+                    <ul>
+                      {pack.primaryOutcomes.slice(0, 3).map(outcome => (
+                        <li key={outcome}>{outcome}</li>
+                      ))}
+                    </ul>
+                    <div className="success-pack-card-actions">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSuccessId(pack.id)
+                          setGeneralTeamMode(false)
+                        }}
+                        className={selected ? "selected-pack-action" : ""}
+                      >
+                        {selected ? "Selected ✓" : "Choose This Pack"}
+                      </button>
+                      <Link href={`/success-packs/${successPackSlug(pack)}`}>View Details →</Link>
+                    </div>
+                  </div>
+                </article>
               )
             })}
           </div>
         </section>
       )}
 
-      {step === 1 && selectedSuccess && (
+      {step === 1 && hasBaseSetup && (
         <section className="build-step">
           <div className="build-step-heading">
-            <p className="lux-eyebrow">STEP 2 · OPTIONAL ENHANCEMENTS</p>
+            <p className="lux-eyebrow">STEP 2 · OPTIONAL KNOWLEDGE ENHANCEMENTS</p>
             <h2>Add Memory Packs.</h2>
             <p>
-              Your {selectedSuccess.name} already works on its own. Memory Packs deepen
-              business judgment and knowledge without replacing the active Success Pack.
+              {selectedSuccess
+                ? `Your ${selectedSuccess.name} gives the team its profession, outcomes, workflows, prompts, and operating rules.`
+                : "Your General Business Team gives you eight coordinated business roles without forcing you into an industry yet."}
+              {" "}Memory Packs sit on top of that foundation and add reusable context so LANA and the specialist agents can understand
+              selected subjects with more depth, continuity, and consistency.
             </p>
           </div>
 
           <div className="build-selected-bar">
-            <strong>{selectedSuccess.name}</strong>
+            <strong>{selectedSuccess?.name ?? "General Business Team"}</strong>
             <span>{memoryIds.length} Memory Pack{memoryIds.length === 1 ? "" : "s"} added</span>
+          </div>
+
+          <div className="memory-pair-mini">
+            <span>{selectedSuccess ? "Success Pack" : "Business Team"}</span>
+            <b>+</b>
+            <span>Memory Pack</span>
+            <b>=</b>
+            <strong>Profession workflow + deeper reusable knowledge</strong>
           </div>
 
           <div className="build-filters">
             <input
               value={memoryQuery}
               onChange={event => setMemoryQuery(event.target.value)}
-              placeholder="Search 100 Memory Packs"
+              placeholder="Search 100 Memory Packs — voice, sales, research, discipline…"
             />
-            <span>{memoryCatalog ? rankedMemory.length + " available" : "Loading Memory Packs…"}</span>
+            <span>{rankedMemory.length} of {memoryCatalog.count}</span>
           </div>
-          {!memoryCatalog && (
-            <div className="build-loading-inline">
-              Loading the Memory Pack library. You can skip this step if you do not want add-ons.
-            </div>
-          )}
-          <div className="memory-pack-grid">
+
+          <div className="memory-pack-grid rich-grid">
             {rankedMemory.map(({ pack, score }, index) => {
               const selected = memoryIds.includes(pack.id)
               const recommended = index < 8 && score > 0
+              const image = memoryPackImage(pack)
+              const accent = memoryPackAccent(pack)
+              const number = memoryPackNumber(pack)
               return (
-                <button
+                <article
                   key={pack.id}
-                  className={"memory-pack-choice" + (selected ? " selected" : "")}
-                  onClick={() => toggleMemory(pack.id)}
+                  className={"memory-pack-choice rich" + (selected ? " selected" : "")}
+                  style={{ "--pack-accent": accent } as CSSProperties}
                 >
-                  <div className="memory-choice-top">
-                    <span>{pack.category}</span>
-                    <em>{recommended ? "Recommended" : "Optional"}</em>
+                  <div className="success-pack-card-art">
+                    <Image
+                      src={image}
+                      alt={pack.name}
+                      fill
+                      sizes="(max-width: 720px) 100vw, (max-width: 1050px) 50vw, 33vw"
+                    />
+                    <div className="success-pack-card-shade" />
+                    <div className="success-pack-card-badges">
+                      <span>MEMORY #{String(number).padStart(3, "0")}</span>
+                      <span>{recommended ? "Recommended" : pack.category}</span>
+                    </div>
                   </div>
-                  <h3>{pack.short_name || pack.name}</h3>
-                  <p>{pack.description}</p>
-                  <strong>{selected ? "Added ✓" : "+ Add Memory Pack"}</strong>
-                </button>
+
+                  <div className="success-pack-card-copy">
+                    <h3>{pack.short_name || pack.name}</h3>
+                    <p>{pack.description}</p>
+                    <ul>
+                      {(pack.use_cases || []).slice(0, 3).map(item => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                    <div className="success-pack-card-actions">
+                      <button
+                        type="button"
+                        onClick={() => toggleMemory(pack.id)}
+                        className={selected ? "selected-pack-action" : ""}
+                      >
+                        {selected ? "Added ✓" : "+ Add Memory Pack"}
+                      </button>
+                      <Link href={`/memory-packs/${memoryPackSlug(pack)}`}>View Details →</Link>
+                    </div>
+                  </div>
+                </article>
               )
             })}
           </div>
         </section>
       )}
 
-      {step === 2 && selectedSuccess && (
+      {step === 2 && hasBaseSetup && (
         <section className="build-step">
-          <div className="build-step-heading">
-            <p className="lux-eyebrow">STEP 3 · YOUR AI TEAM</p>
-            <h2>Your professional team is already included.</h2>
-            <p>
-              LANA installs on every Lux setup. The standard team stays generic,
-              business-oriented, friendly, professional, and ready for customer-facing work.
-            </p>
+          <div className="team-showcase-hero">
+            <div>
+              <p className="lux-eyebrow">STEP 3 · THE LUX BUSINESS TEAM</p>
+              <h2>A whole business team.<br /><span>One $199 one-time setup.</span></h2>
+              <p>
+                This is the core Lux Agent team: LANA plus seven specialist business departments.
+                Use it as a general business team on its own, specialize it with a Success Pack,
+                or deepen any department with Memory Packs.
+              </p>
+              <div className="team-value-pills">
+                <span>8 coordinated roles</span>
+                <span>LANA included</span>
+                <span>General Business Mode</span>
+                <span>Success Pack ready</span>
+                <span>Memory Pack ready</span>
+                <span>Professional customer-service tone</span>
+              </div>
+            </div>
+            <div className="team-showcase-price">
+              <span>COMPLETE TEAM</span>
+              <strong>$199</strong>
+              <small>one-time payment</small>
+              <p>One purchase gives you a coordinated business team instead of a single custom role.</p>
+            </div>
           </div>
 
-          <div className="standard-team-grid">
-            {STANDARD_CUSTOMER_TEAM.map(agent => (
-              <article key={agent.id}>
-                <span>{agent.lane}</span>
-                <h3>{agent.displayName}</h3>
-                <p>{agent.role}</p>
-                <small>{agent.voiceProfile.replaceAll("-", " ")}</small>
-              </article>
-            ))}
+          <div className="team-mode-explainer">
+            <article>
+              <span>GENERAL BUSINESS MODE</span>
+              <strong>Start broad.</strong>
+              <p>Use the eight-role team without choosing an industry. Good for founders who are still deciding what they want to build or who need a flexible business operating team.</p>
+            </article>
+            <article>
+              <span>SUCCESS PACK ENHANCED</span>
+              <strong>Specialize the team.</strong>
+              <p>{selectedSuccess ? `Your selected ${selectedSuccess.name} gives these same departments industry-specific workflows, outcomes, prompts, and operating rules.` : "Add a Success Pack later when you want the team specialized for a particular field."}</p>
+            </article>
+            <article>
+              <span>MEMORY PACK ENHANCED</span>
+              <strong>Deepen what they know.</strong>
+              <p>{selectedMemory.length ? `You already added ${selectedMemory.length} Memory Pack${selectedMemory.length === 1 ? "" : "s"} to give the team more reusable knowledge and context.` : "Memory Packs are optional add-ons that give selected agents more context, continuity, and subject understanding."}</p>
+            </article>
+          </div>
+
+          <div className="team-department-grid">
+            {STANDARD_CUSTOMER_TEAM.map(agent => {
+              const visual = TEAM_CARD_VISUALS[agent.id]
+              return (
+                <article
+                  className={"team-department-card" + (agent.id === "lana" ? " is-lana" : "")}
+                  key={agent.id}
+                  style={{ backgroundImage: `linear-gradient(180deg,rgba(4,10,18,.08),rgba(4,10,18,.88)),url("${visual?.background}")` }}
+                >
+                  <div className="team-department-art">
+                    {agent.id === "lana" ? (
+                      <img src={P + "/brand/lana-locked.png"} alt="LANA, Lux Agent executive coordinator" />
+                    ) : (
+                      <div className="team-department-monogram" aria-hidden="true">{visual?.tag?.slice(0, 1)}</div>
+                    )}
+                  </div>
+                  <div className="team-department-copy">
+                    <span>{visual?.tag ?? agent.lane}</span>
+                    <h3>{agent.displayName}</h3>
+                    <strong>{visual?.headline}</strong>
+                    <p>{visual?.value}</p>
+                    <ul>
+                      {(visual?.outputs ?? []).map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                    <small>{agent.voiceProfile.replaceAll("-", " ")}</small>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+
+          <div className="team-included-summary">
+            <div>
+              <p className="lux-eyebrow">WHAT THE $199 TEAM GIVES YOU</p>
+              <h3>A practical starting company structure—even if you are starting from zero.</h3>
+              <p>
+                You are not buying eight isolated chatbots. LANA coordinates the work across Sales,
+                Marketing, Operations, Automation, Finance, Research, and Social/Content so the customer
+                has a usable business structure from day one.
+              </p>
+            </div>
+            <ul>
+              <li>Executive coordination and daily prioritization</li>
+              <li>Lead, marketing, and customer communication support</li>
+              <li>Operational routines, checklists, and workflow support</li>
+              <li>Finance organization and research support</li>
+              <li>Content planning and public-facing draft support</li>
+              <li>Ready to accept Success Packs and Memory Packs later</li>
+            </ul>
           </div>
 
           <div className={"premium-team-panel" + (customTeam ? " enabled" : "")}>
@@ -328,8 +571,8 @@ export default function BuildMyLux() {
               <p className="lux-eyebrow">PREMIUM CUSTOMIZATION</p>
               <h3>Want a team built specifically for your company?</h3>
               <p>
-                Keep the standard team at no customization charge, or upgrade to customize
-                departments, names, personas, role details, and voice style through Lux Agent Builder.
+                The complete standard team is included in the $199 one-time team setup. Upgrade only if you want to customize
+                departments, names, personas, role details, or voice style through Lux Agent Builder.
               </p>
             </div>
             <label className="premium-toggle">
@@ -371,7 +614,7 @@ export default function BuildMyLux() {
         </section>
       )}
 
-      {step === 3 && selectedSuccess && (
+      {step === 3 && hasBaseSetup && (
         <section className="build-step">
           <div className="build-step-heading">
             <p className="lux-eyebrow">STEP 4 · CHOOSE WHERE LUX LIVES</p>
@@ -418,7 +661,7 @@ export default function BuildMyLux() {
         </section>
       )}
 
-      {step === 4 && selectedSuccess && manifest && (
+      {step === 4 && hasBaseSetup && manifest && (
         <section className="build-step">
           <div className="build-step-heading">
             <p className="lux-eyebrow">STEP 5 · REVIEW MY LUX</p>
@@ -431,9 +674,9 @@ export default function BuildMyLux() {
 
           <div className="setup-review">
             <article>
-              <span>SUCCESS PACK</span>
-              <h3>{selectedSuccess.name}</h3>
-              <p>{selectedSuccess.profession}</p>
+              <span>{selectedSuccess ? "SUCCESS PACK" : "OPERATING MODE"}</span>
+              <h3>{selectedSuccess?.name ?? "General Business Team"}</h3>
+              <p>{selectedSuccess?.profession ?? "No industry specialization required"}</p>
             </article>
             <article>
               <span>MEMORY</span>
@@ -442,8 +685,8 @@ export default function BuildMyLux() {
             </article>
             <article>
               <span>TEAM</span>
-              <h3>LANA + {STANDARD_CUSTOMER_TEAM.length - 1} professional agents</h3>
-              <p>{customTeam ? "Premium team customization requested" : "Standard generic business team"}</p>
+              <h3>LANA + {STANDARD_CUSTOMER_TEAM.length - 1} professional agents · $199 one-time</h3>
+              <p>{customTeam ? "Premium team customization requested in addition to the core team" : "Complete generic business team included"}</p>
             </article>
             <article>
               <span>INSTALL</span>
@@ -464,7 +707,7 @@ export default function BuildMyLux() {
             <h3>What happens after checkout</h3>
             <ol>
               <li><span>1</span><div><strong>Entitlement issued</strong><p>Your purchase is tied to your Lux account.</p></div></li>
-              <li><span>2</span><div><strong>Signed Lux Setup generated</strong><p>Success Pack, Memory Packs, team policy, and install targets are sealed together.</p></div></li>
+              <li><span>2</span><div><strong>Signed Lux Setup generated</strong><p>Your business-team mode, optional Success Pack, Memory Packs, team policy, and install targets are sealed together.</p></div></li>
               <li><span>3</span><div><strong>Install to Lux Agent</strong><p>Desktop opens the signed setup and applies it after customer review.</p></div></li>
               <li><span>4</span><div><strong>Create USB when selected</strong><p>Desktop prepares the portable environment on the customer&apos;s compatible drive.</p></div></li>
             </ol>
