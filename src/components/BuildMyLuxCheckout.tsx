@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useRef, useSyncExternalStore } from "react"
+import { useMemo, useRef, useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import successCatalogData from "../../public/data/lux-success-packs-100.json"
 import memoryCatalogData from "../../public/data/lux-memory-packs-100.json"
@@ -8,6 +8,9 @@ import type { MemoryPackRecord, SuccessPackRecord } from "@/lib/customerSetup"
 import type { SandboxCustomer, SandboxSetup } from "@/lib/buildMyLuxSandbox"
 
 const P = "/lux-agent-website"
+const CHECKOUT_URL =
+  process.env.NEXT_PUBLIC_LUX_AGENT_CHECKOUT_URL ||
+  "https://khyzmyvrfjwwnbvwfhhk.supabase.co/functions/v1/lux-agent-checkout"
 
 type SuccessCatalog = { count?: number; packs: SuccessPackRecord[] }
 type MemoryCatalog = { count?: number; packs: MemoryPackRecord[] }
@@ -67,6 +70,8 @@ export default function BuildMyLuxCheckout() {
   const rawSetup = useStorageString("lux-build-my-lux")
   const localAcceptance = useLocalAcceptanceAvailable()
   const setup = useMemo(() => parseSetup(rawSetup), [rawSetup])
+  const [submitting, setSubmitting] = useState(false)
+  const [checkoutMessage, setCheckoutMessage] = useState("")
 
   const success = setup
     ? successCatalog.packs.find(pack => pack.id === setup.successId) ?? null
@@ -106,6 +111,59 @@ export default function BuildMyLuxCheckout() {
     window.localStorage.setItem("lux-build-my-lux-customer", JSON.stringify(customer))
   }
 
+  const openAssistedCheckout = (customer: SandboxCustomer) => {
+    const subject = encodeURIComponent("Build My Lux checkout request")
+    const memoryLine = memory.map(pack => pack.name).join(", ") || "None"
+    const body = encodeURIComponent(
+      `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease send the secure payment/entitlement next step.`,
+    )
+    window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
+  }
+
+  const beginCheckout = async (customer: SandboxCustomer) => {
+    setSubmitting(true)
+    setCheckoutMessage("Checking secure checkout…")
+
+    try {
+      const returnPathPrefix = window.location.pathname.startsWith(P) ? P : ""
+      const response = await fetch(CHECKOUT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer,
+          setup,
+          returnPathPrefix,
+        }),
+      })
+
+      const data = await response.json().catch(() => ({})) as {
+        url?: string
+        error?: string
+        missingProducts?: string[]
+      }
+
+      if (response.ok && data.url) {
+        setCheckoutMessage("Opening secure Stripe Checkout…")
+        window.location.assign(data.url)
+        return
+      }
+
+      if (response.status === 503 || data.error === "CHECKOUT_NOT_ACTIVATED") {
+        setCheckoutMessage("Online payment is still launch-gated. Opening assisted checkout instead—no charge has been made.")
+        openAssistedCheckout(customer)
+        return
+      }
+
+      setCheckoutMessage("Secure checkout is temporarily unavailable. Opening assisted checkout—no charge has been made.")
+      openAssistedCheckout(customer)
+    } catch {
+      setCheckoutMessage("Online payment is not active on this host yet. Opening assisted checkout—no charge has been made.")
+      openAssistedCheckout(customer)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <main className="builder-checkout">
       <section className="builder-checkout-heading">
@@ -113,8 +171,8 @@ export default function BuildMyLuxCheckout() {
         <p className="lux-eyebrow">BUILD MY LUX · CHECKOUT</p>
         <h1>Review your Lux setup.</h1>
         <p>
-          Your configuration is saved. Production checkout will create the entitlement needed
-          for the signed setup and installer handoff.
+          Your configuration is saved. When Stripe is activated, this same checkout will create
+          the entitlement needed for the signed setup and installer handoff.
         </p>
       </section>
 
@@ -160,18 +218,12 @@ export default function BuildMyLuxCheckout() {
 
           <form
             ref={formRef}
-            onSubmit={event => {
+            onSubmit={async event => {
               event.preventDefault()
               const customer = customerFromForm()
               if (!customer) return
               saveCustomer(customer)
-
-              const subject = encodeURIComponent("Build My Lux checkout request")
-              const memoryLine = memory.map(pack => pack.name).join(", ") || "None"
-              const body = encodeURIComponent(
-                `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease send the secure payment/entitlement next step.`,
-              )
-              window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
+              await beginCheckout(customer)
             }}
           >
             <label>
@@ -192,9 +244,13 @@ export default function BuildMyLuxCheckout() {
               <strong>$199 one-time + selected add-ons</strong>
             </div>
 
-            <button className="lux-button primary" type="submit">
-              Continue to Payment / Entitlement →
+            <button className="lux-button primary" type="submit" disabled={submitting}>
+              {submitting ? "Checking secure checkout…" : "Continue to Payment / Entitlement →"}
             </button>
+
+            {checkoutMessage && (
+              <small role="status">{checkoutMessage}</small>
+            )}
 
             {localAcceptance && (
               <button
@@ -212,8 +268,8 @@ export default function BuildMyLuxCheckout() {
             )}
 
             <small>
-              Production checkout is not yet automated. The localhost-only acceptance checkout moves no money,
-              creates no production license, and exists only to verify the complete setup/download workflow.
+              Stripe charging is intentionally disabled until the launch gate is approved and configured.
+              If online payment is unavailable, this page falls back to assisted checkout and does not create a charge.
             </small>
           </form>
         </aside>
