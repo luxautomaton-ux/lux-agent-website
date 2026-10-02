@@ -42,15 +42,22 @@ export interface WorkshopProgram {
   lessons: Array<string | WorkshopLesson>;
   image: string;
   thumbnail: string;
+  downloadFiles?: Array<{ title: string; url: string }>;
   brandLogo?: string;
   video?: string;
   outcome: string;
-  materials: string[];
+  materials?: string[];
   description: string;
-  learningGoals: string[];
-  prerequisites: string[];
-  safetyNotes: string[];
-  extensionActivities: string[];
+  learningGoals?: string[];
+  prerequisites?: string[];
+  safetyNotes?: string[];
+  extensionActivities?: string[];
+  workbookPdfUrl?: string;
+  facilitatorDeckPdfUrl?: string;
+  fullGuidePdfUrl?: string;
+  date?: string;
+  status?: "published" | "scheduled" | "draft";
+  draft?: boolean;
 }
 
 export interface TvEpisode {
