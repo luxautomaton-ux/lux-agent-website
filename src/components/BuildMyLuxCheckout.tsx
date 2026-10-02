@@ -117,7 +117,7 @@ export default function BuildMyLuxCheckout() {
     const body = encodeURIComponent(
       `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease send the secure payment/entitlement next step.`,
     )
-    window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
+    window.open(`mailto:luxagent@gmail.com?subject=${subject}&body=${body}`, "_self")
   }
 
   const beginCheckout = async (customer: SandboxCustomer) => {
