@@ -1,5 +1,3 @@
-[Reading 30 lines from start (total: 30 lines, 0 remaining)]
-
 {
   "name": "lux-agent-website",
   "version": "0.1.0",
@@ -30,5 +28,3 @@
     "typescript": "^5"
   }
 }
-
-[executed on device: Asas-Mac-mini.local (5f0a06ac-840c-4fbe-902d-d258fcf1af3d)]
