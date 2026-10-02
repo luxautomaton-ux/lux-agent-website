@@ -39,7 +39,7 @@ export interface WorkshopProgram {
   level: "Beginner" | "Intermediate" | "Advanced";
   ageBand: string;
   duration: string;
-  lessons: WorkshopLesson[];
+  lessons: Array<string | WorkshopLesson>;
   image: string;
   thumbnail: string;
   brandLogo?: string;
