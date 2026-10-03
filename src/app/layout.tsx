@@ -4,7 +4,7 @@ import "./globals.css"
 import BrandMark from "@/components/BrandMark"
 
 const siteUrl = "https://luxautomaton-ux.github.io/lux-agent-website/"
-const socialImage = `${siteUrl}og.png`
+const socialImage = `${siteUrl}lux-agent-social-20261002.jpg`
 
 export const metadata: Metadata = {
   title: {
