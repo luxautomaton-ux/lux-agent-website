@@ -1,8 +1,14 @@
 {
   "name": "lux-agent-website",
+  "main": "./cloudflare/asset-compat.ts",
   "compatibility_date": "2026-10-02",
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/lux-agent-website",
+      "/lux-agent-website/*"
+    ],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   }
