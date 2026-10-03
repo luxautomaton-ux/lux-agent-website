@@ -8,7 +8,7 @@
     "start": "next start -p 3080",
     "lint": "eslint",
     "sync:customer-content": "node scripts/sync-customer-content.mjs",
-    "build:cloudflare": "NEXT_PUBLIC_SITE_BASE_PATH= next build",
+    "build:cloudflare": "NEXT_PUBLIC_SITE_BASE_PATH= NEXT_PUBLIC_SITE_URL=https://myluxagent.com next build",
     "deploy:cloudflare": "npm run build:cloudflare && npx --yes wrangler@4.34.0 deploy"
   },
   "dependencies": {
