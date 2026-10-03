@@ -3,10 +3,16 @@ import Link from "next/link"
 import "./globals.css"
 import BrandMark from "@/components/BrandMark"
 
-const siteUrl = "https://luxautomaton-ux.github.io/lux-agent-website/"
+const fallbackSiteUrl = "https://luxautomaton-ux.github.io/lux-agent-website/"
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim()
+const siteUrl = `${configuredSiteUrl || fallbackSiteUrl}`.replace(/\/?$/, "/")
 const socialImage = `${siteUrl}lux-agent-social-20261002.jpg`
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+  },
   title: {
     default: "Lux Agent | Your AI Team. Your Business OS.",
     template: "%s | Lux Agent",
