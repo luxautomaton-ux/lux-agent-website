@@ -2,6 +2,10 @@
   "name": "lux-agent-website",
   "main": "./cloudflare/asset-compat.ts",
   "compatibility_date": "2026-10-02",
+  "routes": [
+    { "pattern": "myluxagent.com", "custom_domain": true },
+    { "pattern": "www.myluxagent.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",
