@@ -1,5 +1,9 @@
+interface AssetBinding {
+  fetch(request: Request): Promise<Response>
+}
+
 interface Env {
-  ASSETS: Fetcher
+  ASSETS: AssetBinding
 }
 
 const LEGACY_PREFIX = "/lux-agent-website"
