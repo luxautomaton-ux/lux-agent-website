@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
-export const metadata = { title: "Download" }
+export const metadata = {
+  alternates: { canonical: seoCanonical("download") }, title: "Download" }
 
 export default function DownloadPage() {
   return (
