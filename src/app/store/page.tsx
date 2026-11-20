@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
-export const metadata = { title: "Pricing" }
+export const metadata = {
+  alternates: { canonical: seoCanonical("store") }, title: "Pricing" }
 
 const offers = [
   ["Lux Agent Desktop", "Core software", "Main Mac/Windows AI workspace", "/download"],
