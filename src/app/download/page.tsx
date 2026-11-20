@@ -31,7 +31,7 @@ export default function DownloadPage() {
         <div>
           <p className="lux-eyebrow">OPTIONAL TRAVEL COMPANION</p>
           <h2>Create a Lux Agent USB on your own compatible drive.</h2>
-          <p>The standard USB path is downloadable and self-service. Use a sufficiently large compatible USB drive, prepare the portable Lux environment, select what travels with you, and reconnect/sync when appropriate.</p>
+          <p>The USB travel edition is release pending, like the desktop installers. When it is published, you will use your own sufficiently large compatible USB drive, prepare the portable Lux environment, select what travels with you, and reconnect/sync when appropriate.</p>
           <Link className="lux-button secondary" href="/products/usb">Explore USB Travel Edition</Link>
         </div>
         <img src="/lux-agent-website/brand/usb-logo-reference.png" alt="Lux Agent USB" />

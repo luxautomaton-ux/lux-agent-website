@@ -15,19 +15,19 @@ const PRODUCTS: Record<string, { name: string; price: string; type: string; acce
     name: 'Preloaded USB', price: '$499', type: 'one-time', accent: '#A275FF', icon: '💾',
     desc: 'Premium solid-state USB drive with Lux Agent OS pre-installed and ready to launch.',
     features: ['Premium USB drive included', 'Lux Agent OS pre-installed', 'LANA basic', 'Business HQ', 'CRM basic', 'Lux Vault basic', 'Success Pack preview', 'Training Workshop', 'Start Here Guide', 'Privacy-first setup', 'Ready-to-launch folder structure'],
-    note: 'Ships within 3–5 business days.',
+    note: 'Release pending — not yet shipping. Submitting sends a request only; nothing is charged or shipped before launch.',
   },
   prod_usb_business: {
     name: 'Business Setup', price: '$999', type: 'one-time', accent: '#2DD4BF', icon: '💼',
     desc: 'Preloaded USB plus a guided setup session with custom Success Pack and CRM configuration.',
     features: ['Everything in Preloaded USB', 'Custom Business HQ setup', 'One full Success Pack', 'CRM starter setup', 'Website starter setup', 'First 30-day business plan', 'Training walkthrough', 'Privacy settings walkthrough'],
-    note: 'Ships within 3–5 business days. Setup session scheduled after delivery.',
+    note: 'Release pending — not yet shipping. Submitting sends a request only; nothing is charged or shipped before launch. Setup session scheduled after delivery.',
   },
   prod_usb_pro: {
     name: 'Pro Setup', price: '$1,999', type: 'one-time', accent: '#FBBF24', icon: '🏆',
     desc: 'Full done-with-you business system — built around your goals with 90-day support.',
     features: ['Everything in Business Setup', 'Personalized Success Pack', 'Money Suite setup', 'Web Intelligence setup', 'Website & lead system setup', '90-day business plan', 'AI Team setup', 'Lux Budgeter setup', 'Lux WriteOff setup', 'Training session', 'Launch checklist'],
-    note: 'Ships within 3–5 business days. Includes onboarding session.',
+    note: 'Release pending — not yet shipping. Submitting sends a request only; nothing is charged or shipped before launch. Includes onboarding session.',
   },
   sub_money_suite: {
     name: 'Money Suite', price: '$79/mo', type: 'monthly', accent: '#34D399', icon: '💰',
