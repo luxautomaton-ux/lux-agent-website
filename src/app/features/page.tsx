@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
-export const metadata = { title: "Features" }
+export const metadata = {
+  alternates: { canonical: seoCanonical("features") }, title: "Features" }
 
 const features = [
   ["AI Team", "LANA coordinates specialist agents across research, communication, operations, technology, and business work."],
