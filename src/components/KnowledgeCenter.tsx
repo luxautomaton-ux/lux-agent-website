@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { CUSTOMER_KNOWLEDGE, KNOWLEDGE_CATEGORIES } from "@/lib/customerKnowledge"
 
@@ -18,6 +18,12 @@ function getSupportApiBase() {
   return configured.replace(/\/$/, "")
 }
 
+// The ?article= deep link is read from the URL without setState-in-effect
+// (static export: the server snapshot is "", the client reads location.search).
+const subscribeNoop = () => () => {}
+const readArticleParam = () => new URLSearchParams(window.location.search).get("article") || ""
+const serverArticleParam = () => ""
+
 type LiveArticle = {
   id: string
   title: string
@@ -32,13 +38,10 @@ export default function KnowledgeCenter({ categoryOnly }: { categoryOnly?: strin
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("All")
   const [liveArticles, setLiveArticles] = useState<LiveArticle[]>([])
-  const [selectedLiveId, setSelectedLiveId] = useState("")
+  const articleFromUrl = useSyncExternalStore(subscribeNoop, readArticleParam, serverArticleParam)
+  const [selectedOverride, setSelectedLiveId] = useState<string | null>(null)
+  const selectedLiveId = selectedOverride ?? articleFromUrl
   const [knowledgeSource, setKnowledgeSource] = useState<"live" | "snapshot" | "built-in">("built-in")
-
-  useEffect(() => {
-    const id = new URLSearchParams(window.location.search).get("article") || ""
-    setSelectedLiveId(id)
-  }, [])
 
   useEffect(() => {
     let cancelled = false
