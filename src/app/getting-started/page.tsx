@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
 export const metadata = {
+  alternates: { canonical: seoCanonical("getting-started") },
   title: "Getting Started",
   description: "A simple beginner walkthrough for choosing, buying, downloading, installing, and using Lux Agent.",
 }
