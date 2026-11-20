@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { seoCanonical } from "@/lib/seoCanonical";
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import ProductGrid from "@/components/ProductGrid"
@@ -7,6 +9,16 @@ export function generateStaticParams() {
   return LUX_PRODUCTS.map(product => ({ slug: product.slug }))
 }
 export const dynamicParams = false
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getLuxProduct(slug);
+  return product ? {
+    title: product.name,
+    description: product.description,
+    alternates: { canonical: seoCanonical(`products/${slug}`) },
+  } : {};
+}
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
