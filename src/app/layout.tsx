@@ -10,9 +10,6 @@ const socialImage = `${siteUrl}lux-agent-social-20261002.jpg`
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: siteUrl,
-  },
   title: {
     default: "Lux Agent | Your AI Team. Your Business OS.",
     template: "%s | Lux Agent",
