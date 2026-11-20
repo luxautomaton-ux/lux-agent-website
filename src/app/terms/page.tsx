@@ -1,3 +1,7 @@
+import { seoCanonical } from "@/lib/seoCanonical";
+
+export const metadata = { alternates: { canonical: seoCanonical("terms") } };
+
 import Link from "next/link";
 
 export default function TermsPage() {

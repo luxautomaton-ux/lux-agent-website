@@ -1,8 +1,10 @@
+import { seoCanonical } from "@/lib/seoCanonical";
 import Link from "next/link"
 import KnowledgeCenter from "@/components/KnowledgeCenter"
 import UpdatesCenter from "@/components/UpdatesCenter"
 
 export const metadata = {
+  alternates: { canonical: seoCanonical("updates") },
   title: "Updates & What’s New",
   description: "See Lux Agent customer-facing release notes, what changed, what to do next, and the Knowledge Articles connected to each update.",
 }

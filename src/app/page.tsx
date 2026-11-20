@@ -1,9 +1,11 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 import ProductGrid from "@/components/ProductGrid"
 
 const P = "/lux-agent-website"
 
 export const metadata = {
+  alternates: { canonical: seoCanonical("") },
   title: "Lux Agent | Your AI Team. Your Business OS.",
   description: "Meet Lux Agent: LANA, your AI team, Lux Agent Desktop, optional USB Travel Edition, Memory Packs, Success Packs, and connected business tools.",
 }

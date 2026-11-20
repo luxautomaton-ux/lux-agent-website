@@ -1,3 +1,4 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
 const solutions = [
@@ -9,7 +10,8 @@ const solutions = [
   ["Desktop + Travel", "Use the full Lux Agent experience at home or office and take a portable companion on the road."],
 ]
 
-export const metadata = { title: "Solutions" }
+export const metadata = {
+  alternates: { canonical: seoCanonical("solutions") }, title: "Solutions" }
 
 export default function SolutionsPage() {
   return (

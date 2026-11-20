@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
-export const metadata = { title: "How It Works" }
+export const metadata = {
+  alternates: { canonical: seoCanonical("how-it-works") }, title: "How It Works" }
 
 const steps = [
   ["Start with Lux Agent Desktop", "Install the main workspace on your Mac or Windows computer after the approved release is published."],

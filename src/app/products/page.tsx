@@ -1,6 +1,8 @@
+import { seoCanonical } from "@/lib/seoCanonical"
 import ProductGrid from "@/components/ProductGrid"
 
 export const metadata = {
+  alternates: { canonical: seoCanonical("products") },
   title: "Products",
   description: "Explore the Lux Agent ecosystem: Desktop, USB, Memory Packs, Success Packs, Flow, Messages, Reader, Warm Connect, Verify, Agent Builder, Money Suite, and Viewer.",
 }
