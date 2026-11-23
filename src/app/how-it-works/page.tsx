@@ -5,7 +5,7 @@ export const metadata = {
   alternates: { canonical: seoCanonical("how-it-works") }, title: "How It Works" }
 
 const steps = [
-  ["Start with Lux Agent Desktop", "Install the main workspace on your Mac or Windows computer after the approved release is published."],
+  ["Start with Lux Agent Desktop", "Install the main workspace on your Mac after the approved release is published. Windows is planned after the Mac release."],
   ["Meet LANA", "Tell LANA about your business, priorities, working style, tools, and what you want the AI team to help accomplish."],
   ["Add context", "Connect files, Business HQ information, Memory Packs, and operating rules so the team can work with useful context."],
   ["Choose tools and packs", "Add Success Packs, workflows, communication, Reader, Warm Connect, Verify, and other Lux tools as needed."],

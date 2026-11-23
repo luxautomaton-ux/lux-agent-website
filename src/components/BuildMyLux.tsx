@@ -632,7 +632,7 @@ export default function BuildMyLux() {
             >
               <img src={P + "/brand/products/lux-agent-desktop-frontback.webp"} alt="" />
               <h3>Lux Agent Desktop</h3>
-              <p>Full Mac / Windows AI workspace.</p>
+              <p>Full Mac AI workspace.</p>
               <strong>{target === "desktop" ? "Selected ✓" : "Choose Desktop"}</strong>
             </button>
             <button

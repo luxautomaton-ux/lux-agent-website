@@ -36,7 +36,7 @@ export default function HomePage() {
               <Link className="lux-button secondary" href="/products/usb">Explore USB Travel Edition <span>→</span></Link>
             </div>
             <div className="hero-platforms">
-              <span>Mac + Windows</span>
+              <span>Mac · Windows planned</span>
               <i />
               <span>Optional USB Travel Edition</span>
               <i />

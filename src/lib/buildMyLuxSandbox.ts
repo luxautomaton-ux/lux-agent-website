@@ -100,7 +100,7 @@ export async function createSandboxSetupBundle(input: {
         "- bundle-manifest.json — SHA-256 checksums",
         "",
         "Production installer status:",
-        "The customer Mac/Windows installer remains gated until the approved release candidate and independent verification evidence are published.",
+        "The customer Mac installer remains gated until the approved release candidate and independent verification evidence are published.",
         "",
       ].join("\n"),
     },

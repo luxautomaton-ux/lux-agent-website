@@ -19,7 +19,7 @@ export const LUX_PRODUCTS: LuxProduct[] = [
     slug: "desktop",
     name: "Lux Agent Desktop",
     short: "Your full AI workspace.",
-    description: "The main Lux Agent experience for Mac and Windows: LANA, your AI team, files, workflows, voice, tools, approvals, and business context in one private workspace.",
+    description: "The main Lux Agent experience for Mac (Windows planned after the Mac release): LANA, your AI team, files, workflows, voice, tools, approvals, and business context in one private workspace.",
     eyebrow: "Desktop AI Workspace",
     status: "Coming Soon",
     icon: "🖥",

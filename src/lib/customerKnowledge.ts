@@ -134,7 +134,7 @@ export const CUSTOMER_KNOWLEDGE: KnowledgeArticle[] = [
     id: "installing-lux",
     title: "Install Lux Agent Desktop",
     category: "Installation",
-    summary: "What to expect when installing the main Mac or Windows Lux Agent workspace.",
+    summary: "What to expect when installing the main Lux Agent workspace on your Mac.",
     purpose: "Use this after checkout when your approved installer and signed setup are ready.",
     steps: [
       "Download the approved Lux Agent installer for your computer.",

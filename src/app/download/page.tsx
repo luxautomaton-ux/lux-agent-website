@@ -11,10 +11,10 @@ export default function DownloadPage() {
         <div>
           <p className="lux-eyebrow">GET STARTED WITH LUX AGENT DESKTOP</p>
           <h1>Download Lux Agent.</h1>
-          <p>Lux Agent Desktop is the main Mac and Windows experience. The production installer buttons will be activated when the current release candidate passes final installed-app verification.</p>
+          <p>Lux Agent Desktop is the main Mac experience. Windows is planned after the Mac release. The production installer buttons will be activated when the current release candidate passes final installed-app verification.</p>
           <div className="download-buttons">
             <button disabled> Mac installer · release pending</button>
-            <button disabled>⊞ Windows installer · release pending</button>
+            <button disabled>⊞ Windows · planned after the Mac release</button>
           </div>
           <small>We do not publish an installer until the release candidate and verification evidence match.</small>
         </div>
@@ -22,7 +22,7 @@ export default function DownloadPage() {
       </section>
 
       <section className="download-steps">
-        <article><span>01</span><h3>Download</h3><p>Choose the approved Mac or Windows installer when it is published.</p></article>
+        <article><span>01</span><h3>Download</h3><p>Choose the approved Mac installer when it is published.</p></article>
         <article><span>02</span><h3>Install</h3><p>Run the installer and complete the guided setup.</p></article>
         <article><span>03</span><h3>Activate</h3><p>Launch Lux Agent, set up your business profile, and meet LANA.</p></article>
       </section>

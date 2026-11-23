@@ -122,8 +122,6 @@ export default function LicenseActivatePage() {
                 style={{ background: 'rgba(26,26,30,1)', border: '1px solid var(--border)', padding: '12px 16px', borderRadius: 8, color: '#fff', fontSize: 14, outline: 'none' }}
               >
                 <option value="mac">macOS (Apple Silicon / Intel)</option>
-                <option value="windows">Windows</option>
-                <option value="linux">Linux</option>
               </select>
             </div>
 
