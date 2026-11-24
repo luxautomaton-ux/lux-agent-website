@@ -32,7 +32,7 @@ export default function HomePage() {
               research, and practical tools into one connected environment—on your desktop and on the go.
             </p>
             <div className="home-actions">
-              <Link className="lux-button primary" href="/download">Download Lux Agent Desktop <span>→</span></Link>
+              <Link className="lux-button primary" href="/download">See release status <span>→</span></Link>
               <Link className="lux-button secondary" href="/products/usb">Explore USB Travel Edition <span>→</span></Link>
             </div>
             <div className="hero-platforms">

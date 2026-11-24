@@ -9,6 +9,7 @@ const PRODUCTS: Record<string, { name: string; price: string; type: string; acce
   prod_download: {
     name: 'Digital Download', price: '$299', type: 'one-time', accent: '#60A5FA', icon: '💻',
     desc: 'Lux Agent OS digital download — set it up yourself on your own USB drive or computer.',
+    note: 'Release pending — request only. Nothing is charged before launch.',
     features: ['Lux Agent OS digital download', 'LANA basic', 'Business HQ', 'CRM basic', 'Lux Vault basic', 'Training Workshop', 'Start Here Guide', 'Success Pack preview', 'Local/private mode', 'Setup instructions'],
   },
   prod_usb_starter: {
@@ -33,13 +34,13 @@ const PRODUCTS: Record<string, { name: string; price: string; type: string; acce
     name: 'Money Suite', price: '$79/mo', type: 'monthly', accent: '#34D399', icon: '💰',
     desc: 'Take control of your business finances with AI-powered budgeting, write-off tracking, money leak detection, and CPA-ready reports.',
     features: ['Lux Budgeter Pro', 'Money Leak Finder', 'Lux WriteOff Pro', 'Receipt Tracker', 'Business License Coach', 'Money Reports', 'Tax & Money Vault', 'CPA-ready export packet'],
-    note: 'Requires Lux Agent USB (any tier). Cancel anytime.',
+    note: 'Requires Lux Agent USB (any tier). Release pending — request only. Nothing is charged before launch.',
   },
   sub_full_business: {
     name: 'Full Business OS', price: '$149/mo', type: 'monthly', accent: '#A275FF', icon: '⚡',
     desc: 'The complete AI-powered business operating system — Money Suite plus Web Intelligence, advanced lead research, competitor reports, and monthly business review workflows.',
     features: ['Everything in Money Suite', 'Web Intelligence Pro', 'Advanced lead research', 'Competitor reports', 'Vendor/tool savings reports', 'Success Pack advanced execution', 'AI Team advanced reports', 'Monthly business review workflows'],
-    note: 'Requires Lux Agent USB (any tier). Cancel anytime. Best value for serious operators.',
+    note: 'Requires Lux Agent USB (any tier). Release pending — request only. Nothing is charged before launch. Best value for serious operators.',
   },
   addon_website: {
     name: 'Website Setup', price: '$499–$2,500', type: 'add-on', accent: '#60A5FA', icon: '🌐',
@@ -158,7 +159,7 @@ function CheckoutContent() {
                   <span style={{ color: product.accent }}>{product.price}</span>
                 </div>
                 {product.type === 'monthly' && (
-                  <p style={{ fontSize: 12, color: 'var(--text-dim)', margin: '4px 0 0', opacity: 0.7 }}>Billed monthly. Cancel anytime.</p>
+                  <p style={{ fontSize: 12, color: 'var(--text-dim)', margin: '4px 0 0', opacity: 0.7 }}>Billed monthly after launch. Nothing is charged before launch.</p>
                 )}
               </div>
 

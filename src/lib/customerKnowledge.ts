@@ -137,7 +137,7 @@ export const CUSTOMER_KNOWLEDGE: KnowledgeArticle[] = [
     summary: "What to expect when installing the main Lux Agent workspace on your Mac.",
     purpose: "Use this after checkout when your approved installer and signed setup are ready.",
     steps: [
-      "Download the approved Lux Agent installer for your computer.",
+      "Download the approved Lux Agent installer for your Mac from the official download page once it is published.",
       "Complete the operating system's normal install approval.",
       "Open Lux Agent and sign in or enter your setup code.",
       "Review the Success Pack, Memory Packs, team, and permissions waiting to install.",

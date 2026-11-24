@@ -26,7 +26,7 @@ export const LUX_PRODUCTS: LuxProduct[] = [
     image: "/lux-agent-website/brand/products/lux-agent-desktop-frontback.webp?v=20261001-4",
     hero: "/lux-agent-website/brand/office-executive.png",
     primaryHref: "/download",
-    primaryLabel: "Download Lux Agent",
+    primaryLabel: "See release status",
     bullets: ["LANA + your AI team", "Voice and chat", "Files and knowledge", "Workflows and approvals", "Business tools", "Private local-first control"],
     sections: [
       { title: "One place to run the work", body: "Plan, create, organize, research, follow up, and automate from one workspace instead of bouncing between disconnected tools." },

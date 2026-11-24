@@ -54,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/build">Build My Lux</Link>
               <Link href="/solutions">Solutions</Link>
               <Link href="/store">Pricing</Link>
-              <Link href="/download">Download</Link>
+              <Link href="/download">Release status</Link>
               <Link href="/knowledge">Knowledge</Link>
               <Link href="/updates">Updates</Link>
               <Link href="/support">Support</Link>

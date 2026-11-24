@@ -13,7 +13,7 @@ const steps = [
   ["3", "Keep the included team or customize", "LANA and the professional standard team are already included. Only choose Premium Team Customization if you want custom departments, names, personas, roles, or voice style.", "/build", "Review My Team"],
   ["4", "Choose Desktop, USB, or both", "Desktop is the full home/office experience. USB is the portable travel companion. Pick both if you want the same approved setup in both places.", "/build", "Choose Install Location"],
   ["5", "Review and checkout", "Confirm the Success Pack, Memory Packs, team choice, and install target. Then complete payment so your Lux entitlement can be created.", "/build", "Review My Lux"],
-  ["6", "Download and install", "Use the approved installer. After the required operating-system approval, Lux guides you through activation and applies your signed setup.", "/download", "Download Lux Agent"],
+  ["6", "Download and install", "Use the approved installer. After the required operating-system approval, Lux guides you through activation and applies your signed setup.", "/download", "See release status"],
 ]
 
 export default function GettingStartedPage() {

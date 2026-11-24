@@ -2,7 +2,7 @@ import { seoCanonical } from "@/lib/seoCanonical"
 import Link from "next/link"
 
 export const metadata = {
-  alternates: { canonical: seoCanonical("download") }, title: "Download" }
+  alternates: { canonical: seoCanonical("download") }, title: "Release status" }
 
 export default function DownloadPage() {
   return (
@@ -10,13 +10,13 @@ export default function DownloadPage() {
       <section className="download-hero">
         <div>
           <p className="lux-eyebrow">GET STARTED WITH LUX AGENT DESKTOP</p>
-          <h1>Download Lux Agent.</h1>
+          <h1>Lux Agent release status.</h1>
           <p>Lux Agent Desktop is the main Mac experience. Windows is planned after the Mac release. The production installer buttons will be activated when the current release candidate passes final installed-app verification.</p>
           <div className="download-buttons">
             <button disabled> Mac installer · release pending</button>
             <button disabled>⊞ Windows · planned after the Mac release</button>
           </div>
-          <small>We do not publish an installer until the release candidate and verification evidence match.</small>
+          <small>We do not publish an installer until the release candidate and verification evidence match. When it ships, the Mac app will be locally signed and checksum-verifiable but not yet notarized by Apple, so macOS asks you to confirm the first launch once. Supported macOS versions will be listed with the release.</small>
         </div>
         <img src="/lux-agent-website/brand/desktop-logo-reference.png" alt="Lux Agent Desktop" />
       </section>
