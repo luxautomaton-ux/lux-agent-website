@@ -50,7 +50,7 @@ export default function PrivacyPage() {
         <section style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 16 }}>4. Stripe Billing Security</h2>
           <p style={{ color: 'var(--text-dim)', fontSize: 14.5, lineHeight: 1.8 }}>
-            We process all transactions securely through Stripe Checkout. Your credit card and payment credentials are never processed or saved on our servers.
+            Online payments are not active yet; nothing is charged before launch. When payments open, transactions will be processed through Stripe Checkout, and your credit card and payment credentials will never be processed or saved on our servers.
           </p>
         </section>
 

@@ -133,7 +133,7 @@ export default function LuxCoderSuitePage() {
         <div id="pricing" style={{ textAlign: 'center', marginBottom: 40 }}>
           <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff', marginBottom: 16 }}>Choose Your Subscription</h2>
           <p style={{ fontSize: 16, color: 'var(--text-dim)', maxWidth: 600, margin: '0 auto' }}>
-            Unlock the power of your own personal AI development team. Cancel anytime.
+            Unlock the power of your own personal AI development team. Release pending — request only. Nothing is charged before launch.
           </p>
         </div>
 
@@ -174,7 +174,7 @@ export default function LuxCoderSuitePage() {
                 className={`btn ${tier.recommended ? 'btn-primary' : 'btn-secondary'}`}
                 style={{ width: '100%', textAlign: 'center', padding: '12px' }}
               >
-                Subscribe to {tier.name}
+                Request {tier.name} · release pending
               </Link>
             </div>
           ))}

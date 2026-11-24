@@ -632,7 +632,7 @@ export default function BuildMyLux() {
             >
               <img src={P + "/brand/products/lux-agent-desktop-frontback.webp"} alt="" />
               <h3>Lux Agent Desktop</h3>
-              <p>Full Mac / Windows AI workspace.</p>
+              <p>Full Mac AI workspace.</p>
               <strong>{target === "desktop" ? "Selected ✓" : "Choose Desktop"}</strong>
             </button>
             <button
@@ -665,9 +665,9 @@ export default function BuildMyLux() {
         <section className="build-step">
           <div className="build-step-heading">
             <p className="lux-eyebrow">STEP 5 · REVIEW MY LUX</p>
-            <h2>Your setup is ready for checkout.</h2>
+            <h2>Your setup is ready to request.</h2>
             <p>
-              Review the configuration before payment. Production installation will use a
+              Review the configuration before you send a request. Once released, installation will use a
               server-signed entitlement bundle; this browser preview never contains credentials.
             </p>
           </div>
@@ -691,7 +691,7 @@ export default function BuildMyLux() {
             <article>
               <span>INSTALL</span>
               <h3>{target === "both" ? "Desktop + USB" : target === "usb" ? "USB Travel" : "Desktop"}</h3>
-              <p>Entitlement and installer handoff after checkout.</p>
+              <p>Installer handoff once Lux Agent is released.</p>
             </article>
           </div>
 
@@ -704,9 +704,9 @@ export default function BuildMyLux() {
           )}
 
           <div className="install-after-checkout">
-            <h3>What happens after checkout</h3>
+            <h3>What happens at launch</h3>
             <ol>
-              <li><span>1</span><div><strong>Entitlement issued</strong><p>Your purchase is tied to your Lux account.</p></div></li>
+              <li><span>1</span><div><strong>Entitlement issued</strong><p>After launch, your purchase is tied to your Lux account.</p></div></li>
               <li><span>2</span><div><strong>Signed Lux Setup generated</strong><p>Your business-team mode, optional Success Pack, Memory Packs, team policy, and install targets are sealed together.</p></div></li>
               <li><span>3</span><div><strong>Install to Lux Agent</strong><p>Desktop opens the signed setup and applies it after customer review.</p></div></li>
               <li><span>4</span><div><strong>Create USB when selected</strong><p>Desktop prepares the portable environment on the customer&apos;s compatible drive.</p></div></li>
@@ -718,7 +718,7 @@ export default function BuildMyLux() {
               Download setup preview
             </button>
             <Link className="lux-button primary" href="/checkout?source=build-my-lux">
-              Continue to Checkout →
+              Request this setup →
             </Link>
           </div>
           <p className="setup-preview-note">

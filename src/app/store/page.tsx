@@ -5,7 +5,7 @@ export const metadata = {
   alternates: { canonical: seoCanonical("store") }, title: "Pricing" }
 
 const offers = [
-  ["Lux Agent Desktop", "Core software", "Main Mac/Windows AI workspace", "/download"],
+  ["Lux Agent Desktop", "Core software", "Main Mac AI workspace", "/download"],
   ["Lux Agent USB", "Travel companion", "Downloadable portable environment for your own compatible USB drive", "/products/usb"],
   ["Memory Packs", "Add-on", "Expandable business memory and reusable context", "/memory-packs"],
   ["Success Packs", "Add-on", "Industry and outcome-specific workflows, templates, and training", "/success-packs"],

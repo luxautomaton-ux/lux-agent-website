@@ -29,7 +29,7 @@ export const starterKnowledge: KnowledgeArticle[] = [
     product_area: "Getting Started",
     tags: ["setup", "beginner", "desktop", "usb"],
     updated_at: TODAY,
-    body: "1. Choose a Success Pack that matches your business.\n2. Add Memory Packs only if you want extra knowledge.\n3. Keep the included professional team or request premium customization.\n4. Choose Lux Agent Desktop, USB, or both.\n5. Review, checkout, download, and follow the guided installer. LANA is included automatically.",
+    body: "1. Choose a Success Pack that matches your business.\n2. Add Memory Packs only if you want extra knowledge.\n3. Keep the included professional team or request premium customization.\n4. Choose Lux Agent Desktop, USB, or both.\n5. Review your setup and send a request. Lux Agent is release pending; the guided installer opens at launch. LANA is included automatically.",
   },
   {
     id: "success-packs-explained",
@@ -74,7 +74,7 @@ export const starterKnowledge: KnowledgeArticle[] = [
     product_area: "USB",
     tags: ["usb", "travel", "portable"],
     updated_at: TODAY,
-    body: "Create the USB from Lux Agent Desktop after purchase. Connect a compatible drive, choose the approved setup, review what will travel, let Lux prepare and verify the drive, then safely eject it. Desktop remains the main home or office system.",
+    body: "After launch, create the USB from Lux Agent Desktop. Connect a compatible drive, choose the approved setup, review what will travel, let Lux prepare and verify the drive, then safely eject it. Desktop remains the main home or office system.",
   },
   {
     id: "build-my-lux-guide",
@@ -83,7 +83,7 @@ export const starterKnowledge: KnowledgeArticle[] = [
     product_area: "Build My Lux",
     tags: ["builder", "setup", "success pack", "memory"],
     updated_at: TODAY,
-    body: "Step 1: choose your Success Pack. Step 2: add optional Memory Packs. Step 3: keep the included professional team or request premium customization. Step 4: choose Desktop, USB, or both. Step 5: review and checkout.",
+    body: "Step 1: choose your Success Pack. Step 2: add optional Memory Packs. Step 3: keep the included professional team or request premium customization. Step 4: choose Desktop, USB, or both. Step 5: review and send a request (release pending; nothing is charged before launch).",
   },
   {
     id: "update-lux-agent",
