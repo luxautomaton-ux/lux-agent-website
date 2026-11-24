@@ -39,7 +39,7 @@ export const CUSTOMER_KNOWLEDGE: KnowledgeArticle[] = [
       "Step 2: Add optional Memory Packs for deeper knowledge.",
       "Step 3: Keep the standard professional team or choose Premium Team Customization.",
       "Step 4: Choose Desktop, USB, or both.",
-      "Step 5: Review the setup, complete checkout, and install the signed Lux setup.",
+      "Step 5: Review the setup and send a request. Lux Agent is release pending; installation opens at launch.",
     ],
     tips: ["Success Pack first; Memory second.", "Custom agents are optional.", "The standard team is enough for most customers."],
     related: ["success-packs", "memory-packs", "installing-lux"],
@@ -135,7 +135,7 @@ export const CUSTOMER_KNOWLEDGE: KnowledgeArticle[] = [
     title: "Install Lux Agent Desktop",
     category: "Installation",
     summary: "What to expect when installing the main Lux Agent workspace on your Mac.",
-    purpose: "Use this after checkout when your approved installer and signed setup are ready.",
+    purpose: "Use this after launch, once your approved installer and signed setup are ready.",
     steps: [
       "Download the approved Lux Agent installer for your Mac from the official download page once it is published.",
       "Complete the operating system's normal install approval.",

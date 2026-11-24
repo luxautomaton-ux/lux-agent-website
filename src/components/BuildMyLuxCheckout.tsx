@@ -11,6 +11,9 @@ const P = "/lux-agent-website"
 const CHECKOUT_URL =
   process.env.NEXT_PUBLIC_LUX_AGENT_CHECKOUT_URL ||
   "https://khyzmyvrfjwwnbvwfhhk.supabase.co/functions/v1/lux-agent-checkout"
+// Fail-closed launch gate: the site never contacts the payment backend unless
+// this is explicitly set to "enabled" at build time after founder approval.
+const ONLINE_CHECKOUT_ENABLED = process.env.NEXT_PUBLIC_LUX_ONLINE_CHECKOUT === "enabled"
 
 type SuccessCatalog = { count?: number; packs: SuccessPackRecord[] }
 type MemoryCatalog = { count?: number; packs: MemoryPackRecord[] }
@@ -112,15 +115,20 @@ export default function BuildMyLuxCheckout() {
   }
 
   const openAssistedCheckout = (customer: SandboxCustomer) => {
-    const subject = encodeURIComponent("Build My Lux checkout request")
+    const subject = encodeURIComponent("Build My Lux setup request (release pending)")
     const memoryLine = memory.map(pack => pack.name).join(", ") || "None"
     const body = encodeURIComponent(
-      `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease send the secure payment/entitlement next step.`,
+      `Build My Lux Checkout\n\nCustomer: ${customer.name}\nEmail: ${customer.email}\nBusiness: ${customer.business}\n\nBusiness Team: $199 one-time\nOperating Mode: ${success?.name ?? "General Business Team"}\nMemory Packs: ${memoryLine}\nInstall: ${targetLabel}\nPremium Custom Team: ${setup.customTeam ? "Yes" : "No"}\nDepartments: ${setup.customDepartments.join(", ") || "Standard team"}\n\nPlease contact me when Lux Agent is released. I understand this is a request only and nothing is charged before launch.`,
     )
     window.open(`mailto:luxagent@gmail.com?subject=${subject}&body=${body}`, "_self")
   }
 
   const beginCheckout = async (customer: SandboxCustomer) => {
+    if (!ONLINE_CHECKOUT_ENABLED) {
+      setCheckoutMessage("Opening your email app with this request. Nothing is charged before launch.")
+      openAssistedCheckout(customer)
+      return
+    }
     setSubmitting(true)
     setCheckoutMessage("Checking secure checkout…")
 
@@ -168,11 +176,11 @@ export default function BuildMyLuxCheckout() {
     <main className="builder-checkout">
       <section className="builder-checkout-heading">
         <Link href="/build">← Edit setup</Link>
-        <p className="lux-eyebrow">BUILD MY LUX · CHECKOUT</p>
+        <p className="lux-eyebrow">BUILD MY LUX · RELEASE PENDING</p>
         <h1>Review your Lux setup.</h1>
         <p>
-          Your configuration is saved. When Stripe is activated, this same checkout will create
-          the entitlement needed for the signed setup and installer handoff.
+          Your configuration is saved in this browser. Lux Agent is not released yet, so this page
+          sends a setup request only. Nothing is charged before launch.
         </p>
       </section>
 
@@ -196,7 +204,7 @@ export default function BuildMyLuxCheckout() {
           <article>
             <span>INSTALL TARGET</span>
             <h2>{targetLabel}</h2>
-            <p>Signed setup handoff after entitlement verification.</p>
+            <p>Signed setup handoff once Lux Agent is released.</p>
           </article>
 
           {setup.customTeam && (
@@ -210,7 +218,7 @@ export default function BuildMyLuxCheckout() {
 
         <aside className="builder-checkout-form">
           <p className="lux-eyebrow">CUSTOMER DETAILS</p>
-          <h2>Continue with this setup</h2>
+          <h2>Request this setup</h2>
           <p className="checkout-price-note">
             Final pricing uses the current Success Pack, Memory Pack, install-target,
             and premium-customization pricing table.
@@ -240,12 +248,12 @@ export default function BuildMyLuxCheckout() {
             </label>
 
             <div className="checkout-total">
-              <span>Core business team</span>
+              <span>Planned launch price</span>
               <strong>$199 one-time + selected add-ons</strong>
             </div>
 
             <button className="lux-button primary" type="submit" disabled={submitting}>
-              {submitting ? "Checking secure checkout…" : "Continue to Payment / Entitlement →"}
+              {submitting ? "Sending request…" : "Request this setup · release pending →"}
             </button>
 
             {checkoutMessage && (
@@ -268,8 +276,8 @@ export default function BuildMyLuxCheckout() {
             )}
 
             <small>
-              Stripe charging is intentionally disabled until the launch gate is approved and configured.
-              If online payment is unavailable, this page falls back to assisted checkout and does not create a charge.
+              Online payment is turned off until launch. Submitting opens an email request to the
+              Lux team; no payment details are collected and nothing is charged.
             </small>
           </form>
         </aside>

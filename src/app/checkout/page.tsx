@@ -114,9 +114,9 @@ function CheckoutContent() {
             )}
           </div>
 
-          {/* Order form */}
+          {/* Release request form */}
           <div className="card" style={{ padding: 32, position: 'sticky', top: 100, borderTop: `3px solid ${product.accent}` }}>
-            <h2 style={{ fontSize: 22, marginBottom: 20 }}>Get {product.name}</h2>
+            <h2 style={{ fontSize: 22, marginBottom: 20 }}>Request {product.name}</h2>
 
             <form
               onSubmit={e => {
@@ -128,9 +128,9 @@ function CheckoutContent() {
                 const phone = data.get('phone') as string
                 const business = data.get('business') as string
 
-                const subject = encodeURIComponent(`Order: ${product.name} (${product.price})`)
+                const subject = encodeURIComponent(`Release request: ${product.name} (${product.price} planned)`)
                 const body = encodeURIComponent(
-                  `New Order Request\n\nProduct: ${product.name}\nPrice: ${product.price}\nType: ${product.type}\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${business}\n\nPlease send payment instructions.`
+                  `Release Request (no payment)\n\nProduct: ${product.name}\nPlanned price: ${product.price}\nType: ${product.type}\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${business}\n\nPlease contact me when this is released. I understand nothing is charged before launch.`
                 )
                 window.location.href = `mailto:luxagent@gmail.com?subject=${subject}&body=${body}`
               }}
@@ -155,7 +155,7 @@ function CheckoutContent() {
 
               <div style={{ padding: '16px 0', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', margin: '4px 0' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, fontWeight: 700 }}>
-                  <span>Total</span>
+                  <span>Planned price</span>
                   <span style={{ color: product.accent }}>{product.price}</span>
                 </div>
                 {product.type === 'monthly' && (
@@ -164,11 +164,11 @@ function CheckoutContent() {
               </div>
 
               <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: 14, fontSize: 16, textAlign: 'center' }}>
-                {product.type === 'monthly' ? `Subscribe — ${product.price}` : `Order — ${product.price}`}
+                {`Request ${product.name} · release pending`}
               </button>
 
               <p style={{ fontSize: 11, color: 'var(--text-dim)', textAlign: 'center', opacity: 0.5, margin: 0, lineHeight: 1.5 }}>
-                You&apos;ll receive payment instructions via email. Your information is private and never shared.
+                This sends a request only. No payment is taken and nothing is charged before launch. Your information is private and never shared.
               </p>
             </form>
           </div>
