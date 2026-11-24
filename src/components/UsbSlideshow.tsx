@@ -64,7 +64,7 @@ export default function UsbSlideshow() {
         </div>
         <h2 style={{ fontSize: 34, fontWeight: 800, marginBottom: 12 }}>Built on a <span style={{ color: '#FBBF24' }}>Professional-Grade</span> USB Drive</h2>
         <p style={{ fontSize: 16, color: 'var(--text-dim)', maxWidth: 650, margin: '0 auto', lineHeight: 1.6 }}>
-          Every preloaded Lux Agent USB ships on a premium solid-state drive with a built-in smart display, AI temperature management, and 1090 MB/s transfer speeds. This is not a basic thumb drive. Ships within 3–5 business days.
+          Every preloaded Lux Agent USB ships on a premium solid-state drive with a built-in smart display, AI temperature management, and 1090 MB/s transfer speeds. This is not a basic thumb drive. Release pending — not yet shipping.
         </p>
       </div>
 
